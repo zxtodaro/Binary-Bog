@@ -15,6 +15,9 @@ public class BinaryBogActivity extends Activity {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
 			
+			//no sleepy androidy
+			getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+			
 			//set no title
 			this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 			

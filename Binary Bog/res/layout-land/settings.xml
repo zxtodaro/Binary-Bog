@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:text="Settings" >
+	
+    <RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center" >
+        
+        <TextView
+            android:layout_width="fill_parent"
+    		android:layout_height="fill_parent"
+    		android:gravity="center"
+    		android:text="I'm checking to see if this dialog box's alpha is low enough. If it isn't I'm going to beat you up."
+    		android:id="@+id/text1" />
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="341dp"
+            android:layout_marginTop="233dp"
+            android:text="Convert to Binary" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/radioButton1"
+            android:layout_below="@+id/radioButton1"
+            android:layout_marginTop="27dp"
+            android:text="Convert to Octal" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/radioButton1"
+            android:layout_alignLeft="@+id/radioButton1"
+            android:layout_marginBottom="58dp"
+            android:text="Convert to Hexadecimal" />
+    
+    </RelativeLayout>
+    
+
+    
+</LinearLayout>

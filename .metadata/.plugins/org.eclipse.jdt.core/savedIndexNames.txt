@@ -1,0 +1,3 @@
+INDEX VERSION 1.126+T:\BinaryBog\.metadata\.plugins\org.eclipse.jdt.core
+3418075330.index
+506767520.index

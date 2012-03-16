@@ -1,9 +1,12 @@
 package com.zxtodaro.binarybog;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 public class MainMenu extends Activity {
 
@@ -11,6 +14,9 @@ public class MainMenu extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		
+		//no sleepy androidy
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 	
 		//set no title
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -23,8 +29,29 @@ public class MainMenu extends Activity {
 	
 	}
 	
-	
+	public void gotoSettings(View v) {
+			
+		Button btnSettings = (Button) findViewById(R.id.Settings);
+		Intent settings = new Intent(v.getContext(), Settings.class);
+		startActivityForResult(settings,0);
 
+	}
+	
+	public void gotoGame(View v) {
+		
+		Button btnPlay = (Button) findViewById(R.id.Play);
+		Intent play = new Intent(v.getContext(), Play.class);
+		startActivityForResult(play,0);
+
+	}
+
+	public void gotoAbout(View v) {
+		
+		Button btnAbout = (Button) findViewById(R.id.About);
+		Intent about = new Intent(v.getContext(), About.class);
+		startActivityForResult(about,0);
+
+	}
 	
 
 }

@@ -4,49 +4,54 @@
     android:layout_height="fill_parent"
     android:orientation="horizontal"
     android:text="Settings" >
-	
-    <RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:gravity="center" >
-        
-        <TextView
-            android:layout_width="fill_parent"
-    		android:layout_height="fill_parent"
-    		android:gravity="center"
-    		android:text="I'm checking to see if this dialog box's alpha is low enough. If it isn't I'm going to beat you up."
-    		android:id="@+id/text1" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" 
+        android:padding="55dp" 
+        android:checkedButton="@+id/radTo" android:layout_marginTop="25dp">
 
         <RadioButton
-            android:id="@+id/radioButton1"
+            android:id="@+id/radTo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="341dp"
-            android:layout_marginTop="233dp"
-            android:text="Convert to Binary" />
+            android:layout_marginBottom="24dp"
+            android:text="Convert to" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/radFrom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/radioButton1"
-            android:layout_below="@+id/radioButton1"
-            android:layout_marginTop="27dp"
-            android:text="Convert to Octal" />
+            android:layout_alignLeft="@+id/radTo"
+            android:layout_below="@+id/radTo"
+            android:text="Convert from" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" 
+        android:padding="55dp" 
+        android:checkedButton="@+id/radBin" >
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/radBin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/radioButton1"
-            android:layout_alignLeft="@+id/radioButton1"
-            android:layout_marginBottom="58dp"
-            android:text="Convert to Hexadecimal" />
-    
-    </RelativeLayout>
-    
+            android:text="Binary" />
 
-    
+        <RadioButton
+            android:id="@+id/radOct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Octal" android:paddingBottom="20dp" android:paddingTop="20dp"/>
+
+        <RadioButton
+            android:id="@+id/radHex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hexadecimal" />
+    </RadioGroup>
+
 </LinearLayout>

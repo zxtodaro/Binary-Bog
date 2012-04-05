@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="41" version="2.0">
+<workbench progressCount="44" version="2.0">
 <workbenchAdvisor/>
 <window height="580" maximized="true" width="798" x="263" y="273">
 <fastViewData fastViewLocation="1024"/>
@@ -22,8 +22,8 @@
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="190" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
-<coolItem id="com.android.ide.eclipse.editors.layout.LayoutEditor" itemType="typePlaceholder" x="-1" y="-1"/>
-<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="com.android.ide.eclipse.editors.layout.LayoutEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
@@ -34,12 +34,17 @@
 <folder appearance="1" expanded="2">
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
+<part id="1"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" partName="Binary Bog Manifest" path="T:/BinaryBog/Binary Bog/AndroidManifest.xml" title="Binary Bog Manifest" tooltip="Binary Bog/AndroidManifest.xml" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Binary Bog/AndroidManifest.xml"/>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Play.java" partName="Play.java" path="T:/BinaryBog/Binary Bog/src/com/zxtodaro/binarybog/Play.java" title="Play.java" tooltip="Binary Bog/src/com/zxtodaro/binarybog/Play.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Binary Bog/src/com/zxtodaro/binarybog/Play.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="656" selectionTopPixel="0"/>
+</editor>
+<editor id="com.android.ide.eclipse.editors.layout.LayoutEditor" name="game.xml" partName="game.xml" path="T:/BinaryBog/Binary Bog/res/layout/game.xml" title="game.xml" tooltip="Binary Bog/res/layout/game.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Binary Bog/res/layout/game.xml"/>
 </editor>
 </editors>
 <views>
@@ -48,6 +53,9 @@
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
+<expanded>
+<category IMemento.internal.id="Warnings (13 items)"/>
+</expanded>
 <columnWidths org.eclipse.ui.ide.locationField="90" org.eclipse.ui.ide.markerType="90" org.eclipse.ui.ide.pathField="120" org.eclipse.ui.ide.resourceField="90" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
@@ -114,7 +122,7 @@
 <view id="org.eclipse.jdt.ui.SourceView" partName="Declaration"/>
 <view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.PackageExplorer" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.jdt.internal.ui.JavaPerspectiveFactory" id="org.eclipse.jdt.ui.JavaPerspective" label="Java"/>
 <alwaysOnActionSet id="org.eclipse.mylyn.doc.actionSet"/>
@@ -266,8 +274,57 @@
 <navigationHistory>
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" path="/Binary Bog/AndroidManifest.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Binary Bog/src/com/zxtodaro/binarybog/Play.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Binary Bog/src/com/zxtodaro/binarybog/BinaryBogActivity.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" path="/Binary Bog/res/layout/game.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" path="/Binary Bog/res/layout/about.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Binary Bog/src/com/zxtodaro/binarybog/About.java"/>
 </editors>
-<item active="true" historyLabel="Binary Bog Manifest" index="0"/>
+<item historyLabel="Binary Bog Manifest" index="0"/>
+<item historyLabel="Play.java" index="1">
+<position info="not_deleted" x="31" y="0"/>
+</item>
+<item historyLabel="BinaryBogActivity.java" index="2">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="game.xml" index="3"/>
+<item historyLabel="BinaryBogActivity.java" index="2">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="game.xml" index="3"/>
+<item historyLabel="Play.java" index="1">
+<position info="not_deleted" x="31" y="0"/>
+</item>
+<item historyLabel="Binary Bog Manifest" index="0"/>
+<item historyLabel="game.xml" index="3"/>
+<item historyLabel="about.xml" index="4"/>
+<item historyLabel="game.xml" index="3"/>
+<item historyLabel="about.xml" index="4"/>
+<item historyLabel="About.java" index="5">
+<position info="not_deleted" x="379" y="218"/>
+</item>
+<item historyLabel="game.xml" index="3"/>
+<item historyLabel="Play.java" index="1">
+<position info="not_deleted" x="31" y="0"/>
+</item>
+<item historyLabel="about.xml" index="4"/>
+<item historyLabel="About.java" index="5">
+<position info="not_deleted" x="379" y="218"/>
+</item>
+<item historyLabel="about.xml" index="4"/>
+<item historyLabel="Play.java" index="1">
+<position info="not_deleted" x="31" y="0"/>
+</item>
+<item historyLabel="game.xml" index="3"/>
+<item historyLabel="BinaryBogActivity.java" index="2">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="game.xml" index="3"/>
+<item historyLabel="Binary Bog Manifest" index="0"/>
+<item historyLabel="game.xml" index="3"/>
+<item active="true" historyLabel="Play.java" index="1">
+<position info="not_deleted" x="31" y="0"/>
+</item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
@@ -286,6 +343,21 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="About.java" tooltip="Binary Bog/src/com/zxtodaro/binarybog/About.java">
+<persistable path="/Binary Bog/src/com/zxtodaro/binarybog/About.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" name="about.xml" tooltip="Binary Bog/res/layout/about.xml">
+<persistable path="/Binary Bog/res/layout/about.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" name="game.xml" tooltip="Binary Bog/res/layout/game.xml">
+<persistable path="/Binary Bog/res/layout/game.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BinaryBogActivity.java" tooltip="Binary Bog/src/com/zxtodaro/binarybog/BinaryBogActivity.java">
+<persistable path="/Binary Bog/src/com/zxtodaro/binarybog/BinaryBogActivity.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Play.java" tooltip="Binary Bog/src/com/zxtodaro/binarybog/Play.java">
+<persistable path="/Binary Bog/src/com/zxtodaro/binarybog/Play.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="Binary Bog/AndroidManifest.xml">
 <persistable path="/Binary Bog/AndroidManifest.xml"/>
 </file>
@@ -303,9 +375,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" name="splash.xml" tooltip="Binary Bog/res/layout/splash.xml">
 <persistable path="/Binary Bog/res/layout/splash.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BinaryBogActivity.java" tooltip="Binary Bog/src/com/zxtodaro/binarybog/BinaryBogActivity.java">
-<persistable path="/Binary Bog/src/com/zxtodaro/binarybog/BinaryBogActivity.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Settings.java" tooltip="Binary Bog/src/com/zxtodaro/binarybog/Settings.java">
 <persistable path="/Binary Bog/src/com/zxtodaro/binarybog/Settings.java"/>

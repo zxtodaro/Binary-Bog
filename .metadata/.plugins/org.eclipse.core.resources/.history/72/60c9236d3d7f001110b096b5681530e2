@@ -1,0 +1,8 @@
+package com.zxtodaro.binarybog;
+
+	public enum Indicators {
+		BULLSEYE,
+		HOT,
+		WARM,
+		COLD;
+	}

@@ -21,20 +21,11 @@ public class Environment extends View {
 	private Bitmap frogBmp = null;
 	private Paint water = null;
 	private Paint land = null;
-	private boolean isFlagHidden = false;
 	private int lilyBoundX = -1;
 	private int lilyBoundY = -1;
 	
-	
-	//Hides the flag based on the screen boundaries
-	public void hideTheFlag(){
-		lilypadX = (int) Math.ceil(Math.random() * lilyBoundX);
-		lilypadY = (int) Math.ceil(Math.random() * lilyBoundY);
-		isFlagHidden = true;
-		invalidate();
-		}
-	
 	public Environment(Context context, AttributeSet aSet) {
+		
 		super(context, aSet);
 		lilypadBmp = BitmapFactory.decodeResource(getResources(), R.drawable.lilypad2);
 		frogBmp = BitmapFactory.decodeResource(getResources(), R.drawable.frog_player);
@@ -49,42 +40,40 @@ public class Environment extends View {
 	//Draws playspace
 		@Override
 		public void onDraw(Canvas canvas) {
+			
 		if ((lilypadX < 1) || (lilypadY < 1)) {
 		lilypadX = (int)(getWidth() / 2) - lilypadBmp.getWidth() / 2;
 		lilypadY = (int)(getHeight() / 2) - lilypadBmp.getHeight() / 2;
-		frogX = (int)(getWidth() / 2) - frogBmp.getWidth() / 2;
-		frogY = (int)getHeight() - frogBmp.getHeight();
+	//find & set boundaries
 		lilyBoundX = (int)(getWidth() / 8 * 7) - lilypadBmp.getWidth();
 		lilyBoundY = (int)getHeight() - lilypadBmp.getHeight();
 		}
+		if ((frogX < 1) || (frogY < 1)){
+		frogX = (int)(getWidth() / 2) - frogBmp.getWidth() / 2;
+		frogY = (int)getHeight() - frogBmp.getHeight();
+		}
 		canvas.drawRect(0, 0, (getWidth() / 8 * 1), getHeight(), land);
 		canvas.drawRect((getWidth() / 8 * 7), 0, getWidth(), getHeight(), land);
-		if (!isFlagHidden) {
 		canvas.drawBitmap(lilypadBmp, lilypadX, lilypadY, null);
 		canvas.drawBitmap(frogBmp, frogX, frogY, null);
 		}
-		}
-	
-	//Allows the user to give up and reveals flag
-	public void giveUp(){
-		isFlagHidden = false;
-		invalidate();
-		}
 	
 	
-	public Indicators takeAGuess(float x, float y, Canvas canvas) {
-		//this is the area that contains our flag
+	public Indicator takeAGuess(float x, float y) {
+		
+		//create lilypad rectangle for collision
 		Rect lilyBox = new Rect(lilypadX, lilypadY, lilypadX+lilypadBmp.getWidth(), lilypadY+lilypadBmp.getHeight());
 		//check to see where on the board the user pressed
-		if (lilyBox.contains((int) x, (int)y)) {
-		canvas.drawBitmap(frogBmp, x, y, null);
-		//found it
-		isFlagHidden = false;
+		if (lilyBox.contains((int)x, (int)y)) {
+		//on lilypad
+		frogX = lilypadX;
+		frogY = lilypadY;
 		invalidate();
-		return Indicators.HOP;
-		} else {
+		return Indicator.HOP;
+		} 
+		else {
 		//not on lilypad
-		return Indicators.DROWN;
+		return Indicator.DROWN;
 		}
 	}
 		

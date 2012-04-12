@@ -9,6 +9,15 @@ public class Frog {
 	private int BoundY = -1;
 	private Bitmap Bmp = null;
 	
+	
+	public Frog() {
+		X = -1;
+		Y = -1;
+		BoundX = -1;
+		BoundY = -1;
+		Bmp = null;
+	}
+	
 	public int getX() {
 		return X;
 	}
@@ -40,4 +49,11 @@ public class Frog {
 		Bmp = bmp;
 	}
 	
+	public int getWidth() {
+		return Bmp.getWidth();
+	}
+	
+	public int getHeight() {
+		return Bmp.getHeight();
+	}
 }

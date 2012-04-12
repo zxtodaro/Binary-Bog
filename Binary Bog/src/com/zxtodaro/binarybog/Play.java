@@ -15,7 +15,6 @@ import android.widget.TextView;
 	public class Play extends Activity implements OnTouchListener {
 	
 		private Environment gameEnv = null;
-		private Lilypad lilypad = null;
 		
 		/** Called when the activity is first created. */
 		@Override
@@ -38,8 +37,7 @@ import android.widget.TextView;
 	public boolean onTouch(View v, MotionEvent event) {
 		if (v.getId() == R.id.canvas) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
-				if (lilypad.onPress(event.getX(), event.getY()) == Indicator.HOP); {
-					
+				if (gameEnv.onPress(event.getX(), event.getY()) == Indicator.HOP); {
 				}
 			return true;
 			}

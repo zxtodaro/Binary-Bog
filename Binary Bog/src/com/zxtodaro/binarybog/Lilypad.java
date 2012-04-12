@@ -12,20 +12,15 @@ public class Lilypad {
 	private Bitmap Bmp = null;
 	private boolean one = false;
 	
-	
-	public Indicator onPress(float x, float y) {
-		
-		//create lilypad rectangle for collision
-		Rect lilyBox = new Rect(X, Y, X+Bmp.getWidth(), Y+Bmp.getHeight());
-		//check to see where on the board the user pressed
-		if (lilyBox.contains((int)x, (int)y)) {
-		return Indicator.HOP;
-		} 
-		else {
-		//not on lilypad
-		return Indicator.DROWN;
-		}
+	public Lilypad() {
+		X = -1;
+		Y = -1;
+		BoundX = -1;
+		BoundY = -1;
+		Bmp = null;
+		one = false;
 	}
+	
 
 	public int getX() {
 		return X;
@@ -71,7 +66,15 @@ public class Lilypad {
 		this.BoundX = x;
 	}
 	
-	public void setBoundy(int y) {
-		this.BoundX = y;
+	public void setBoundY(int y) {
+		this.BoundY = y;
+	}
+	
+	public int getBoundX() {
+		return BoundX;
+	}
+	
+	public int getBoundY() {
+		return BoundY;
 	}
 }

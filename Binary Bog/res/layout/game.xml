@@ -7,7 +7,6 @@
 		<com.zxtodaro.binarybog.Environment
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
- 			android:id="@+id/canvas"
- 			android:background="@drawable/river" />
+ 			android:id="@+id/canvas" />
 
 </LinearLayout>

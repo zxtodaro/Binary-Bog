@@ -1,34 +1,54 @@
 package com.zxtodaro.binarybog;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 
 public class Frog {
-	private int X = -1;
-	private int Y = -1;
-	private int BoundX = -1;
-	private int BoundY = -1;
-	private Bitmap Bmp = null;
-	
-	
+	private int X;
+	private int Y;
+	private int BoundX;
+	private int BoundY;
+	private Bitmap bmp;
+	private boolean hopped;
+	private double speed;
+
 	public Frog() {
 		X = -1;
 		Y = -1;
 		BoundX = -1;
 		BoundY = -1;
-		Bmp = null;
+		bmp = null;
 	}
+	
+	public Frog (Resources res, int X, int Y) {
+		bmp = BitmapFactory.decodeResource(res, R.drawable.frog_player);
+		this.X = X - bmp.getWidth() / 2;
+		this.Y = Y - bmp.getHeight();
+		hopped = false;
+		speed = .009;
+	}
+	
+    public void doDraw(Canvas c) {
+        c.drawBitmap(bmp, X, Y, null);
+    }
+    
+    public void animation(long runTime) {
+    		Y += speed * (runTime * 5f);
+    }
 	
 	public int getX() {
 		return X;
 	}
 	public void setX(int x) {
-		X = x;
+		this.X = x;
 	}
 	public int getY() {
 		return Y;
 	}
 	public void setY(int y) {
-		Y = y;
+		this.Y = y;
 	}
 	public int getBoundX() {
 		return BoundX;
@@ -43,17 +63,26 @@ public class Frog {
 		BoundY = boundY;
 	}
 	public Bitmap getBmp() {
-		return Bmp;
+		return bmp;
 	}
 	public void setBmp(Bitmap bmp) {
-		Bmp = bmp;
+		this.bmp = bmp;
 	}
 	
 	public int getWidth() {
-		return Bmp.getWidth();
+		return bmp.getWidth();
 	}
 	
 	public int getHeight() {
-		return Bmp.getHeight();
+		return bmp.getHeight();
+	}
+	
+	
+	public boolean isHopped() {
+		return hopped;
+	}
+
+	public void setHopped(boolean hopped) {
+		this.hopped = hopped;
 	}
 }

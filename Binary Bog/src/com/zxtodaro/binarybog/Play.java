@@ -21,7 +21,7 @@ import android.widget.TextView;
 		Environment gameEnv;
 		Thread playThread;
 		static int loopSpeed = 20;
-		private int lilypadSpawnRate = 50;	
+		private int lilypadSpawnRate = 100;	
 		//time since last lilypad
 		private int lilypadSplit = 0;
 		//track lilypads on screen
@@ -120,7 +120,7 @@ import android.widget.TextView;
 				synchronized(gameEnv.lilypads) {
 					gameEnv.lilypads.add(new Lilypad(getResources()));
 					
-					//set time since last item to
+					//set time since last item to runtime(loops passed)
 					lilypadSplit = runTime;
 					
 					//increase count of lilypads on screen
@@ -135,9 +135,7 @@ import android.widget.TextView;
 					Lilypad listItem = i.next();
 					
 					if (listItem.outOfBounds()) {
-						i.remove();
-						Log.i("DQ", "OOB");
-						
+						i.remove();						
 						//decrement lilypads on screen
 						lilypadCount--;
 						//create new lilypad on destruction of another
@@ -156,7 +154,6 @@ import android.widget.TextView;
 	//when user touches check if they press within the bounding box of all lilypads in array
 	public boolean onTouch(View v, MotionEvent event) {
 		if (v.getId() == gameEnv.getId()) {
-			Log.i("iTouch", "Myself");
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
 				for (Iterator<Lilypad> i = gameEnv.lilypads.iterator(); i.hasNext();) {
 					Lilypad listItem = i.next();
@@ -166,9 +163,16 @@ import android.widget.TextView;
 						gameEnv.frog.setX(listItem.getX());
 						gameEnv.frog.setY(listItem.getY());
 						
-						//if player hops and has not hopped before change hopped to true
+						//if player hops and has not hopped before, change hopped to true
 						if (gameEnv.frog.isHopped() == false) {
 							gameEnv.frog.setHopped(true);
+						}
+						
+						if (listItem.isOne()) {
+							Log.i("boolean","I'm a one");
+						}
+						else {
+							Log.i("boolean", "I'm a zero");
 						}
 					}
 				}

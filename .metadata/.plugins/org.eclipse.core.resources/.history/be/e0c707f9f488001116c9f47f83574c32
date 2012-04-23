@@ -1,0 +1,117 @@
+package com.zxtodaro.binarybog;
+
+import java.util.Random;
+
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+
+public class Lilypad {
+	//x & y coordinates
+	private float X;
+	private float Y;
+	
+	//x & y boundaries
+	private float BoundX;
+	private float BoundY;
+	
+	//bitmap for lilypad
+	private Bitmap bmp;
+	
+	//value (0, or 1)
+	private boolean one;
+	
+	//random number generator for item image, value, and lane
+	private Random r = new Random();
+	
+	//y speed
+	private double speedY;
+	
+	//constructor
+	public Lilypad(Resources res) {
+		
+		//Randomly create one or zero
+		boolean b = r.nextBoolean();
+		
+		//set travel lane
+		laneX = r.nextInt(8);
+		X = laneX
+		Y = 0 - bmp.getHeight();
+		BoundX = -1;
+		BoundY = -1;
+		bmp = null;
+		speedY = .25;
+		one = b;	
+	}
+	
+	public void animation(long runTime) {
+		Y += speedY * (runTime * 5f);
+	}
+	
+	
+    public boolean outOfBounds() {
+        if (Y - bmp.getHeight() >= Environment.height) {
+            return true;
+        }
+        
+        return false;
+    }
+	
+	
+	
+	//get x position
+	public int getX() {
+		return (int)X;
+	}
+	//set x position
+	public void setX(int lilypadX) {
+		this.X = lilypadX;
+	}
+	//get y position
+	public int getY() {
+		return (int)Y;
+	}
+	//set y position
+	public void setY(int lilypadY) {
+		this.Y = lilypadY;
+	}
+	//check if lilypad is 1(true) or 0(false)
+	public boolean isOne() {
+		return one;
+	}
+	//set lilypad to 1(true) or 0(false)
+	public void setOne(boolean one) {
+		this.one = one;
+	}
+	//check bitmap of lilypad
+	public Bitmap getBmp() {
+		return bmp;
+	}
+	// set the bitmap of lilypad
+	public void setBmp(Bitmap lilypadBmp) {
+		this.bmp = lilypadBmp;
+	}
+	//get image width
+	public int getWidth() {
+		return bmp.getWidth();
+	}
+	//get image height
+	public int getHeight() {
+		return bmp.getHeight();
+	}
+	//set x boundary
+	public void setBoundX(int x) {
+		this.BoundX = x;
+	}
+	//set y boundary
+	public void setBoundY(int y) {
+		this.BoundY = y;
+	}
+	//get x boundary
+	public int getBoundX() {
+		return (int)BoundX;
+	}
+	//get y boundary
+	public int getBoundY() {
+		return (int)BoundY;
+	}
+}

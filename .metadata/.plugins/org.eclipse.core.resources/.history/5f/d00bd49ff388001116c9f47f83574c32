@@ -1,0 +1,111 @@
+package com.zxtodaro.binarybog;
+
+import java.util.Random;
+
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+
+public class Lilypad {
+	//x & y coordinates
+	private float X = -1;
+	private float Y = -1;
+	
+	//x & y boundaries
+	private float BoundX = -1;
+	private float BoundY = -1;
+	
+	//bitmap for lilypad
+	private Bitmap bmp = null;
+	
+	//value (0, or 1)
+	private boolean one = false;
+	
+	//random number to determine item image
+	private Random r = new Random();
+	
+	//x and y speed
+	private double speedX;
+	private double speedY;
+	
+	//constructor
+	public Lilypad(Resources resrc) {
+		
+		//Randomly create one or zero
+		boolean b = r.nextBoolean();
+		
+		X = -1;
+		Y = -1;
+		BoundX = -1;
+		BoundY = -1;
+		bmp = null;
+		one = b;	
+	}
+	
+	
+    public boolean outOfBounds() {
+        if (Y - bmp.getHeight() >= Environment.height) {
+            return true;
+        }
+        
+        return false;
+    }
+	
+	
+	
+	//get x position
+	public int getX() {
+		return (int)X;
+	}
+	//set x position
+	public void setX(int lilypadX) {
+		this.X = lilypadX;
+	}
+	//get y position
+	public int getY() {
+		return (int)Y;
+	}
+	//set y position
+	public void setY(int lilypadY) {
+		this.Y = lilypadY;
+	}
+	//check if lilypad is 1(true) or 0(false)
+	public boolean isOne() {
+		return one;
+	}
+	//set lilypad to 1(true) or 0(false)
+	public void setOne(boolean one) {
+		this.one = one;
+	}
+	//check bitmap of lilypad
+	public Bitmap getBmp() {
+		return bmp;
+	}
+	// set the bitmap of lilypad
+	public void setBmp(Bitmap lilypadBmp) {
+		this.bmp = lilypadBmp;
+	}
+	//get image width
+	public int getWidth() {
+		return bmp.getWidth();
+	}
+	//get image height
+	public int getHeight() {
+		return bmp.getHeight();
+	}
+	//set x boundary
+	public void setBoundX(int x) {
+		this.BoundX = x;
+	}
+	//set y boundary
+	public void setBoundY(int y) {
+		this.BoundY = y;
+	}
+	//get x boundary
+	public int getBoundX() {
+		return (int)BoundX;
+	}
+	//get y boundary
+	public int getBoundY() {
+		return (int)BoundY;
+	}
+}

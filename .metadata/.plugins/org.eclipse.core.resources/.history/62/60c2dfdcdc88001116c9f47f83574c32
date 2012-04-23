@@ -1,0 +1,41 @@
+package com.zxtodaro.binarybog;
+
+
+import android.graphics.Canvas;
+import android.view.SurfaceHolder;
+
+public class EnvThread extends Thread {
+	
+	private Environment gameEnv;
+	private SurfaceHolder surfHolder;
+	private boolean run = false;
+	
+	//Constructor
+	public EnvThread(Environment e) {
+		gameEnv = e;
+		surfHolder = gameEnv.getHolder();
+	}
+	
+	public void setRun(boolean b) {
+		run = b;
+	}
+
+	@Override
+	public void run() {
+		Canvas c = null;
+		startTime = System.currentTimeMillis();
+		while (run) {
+			c = surfHolder.lockCanvas();
+			
+			if (c!= null) {
+				//draw
+				gameEnv.doDraw(c);
+				surfHolder.unlockCanvasAndPost(c);
+				
+			}
+			
+		}
+		
+	}
+	
+}

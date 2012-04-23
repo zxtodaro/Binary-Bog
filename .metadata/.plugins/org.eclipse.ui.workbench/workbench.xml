@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="34" version="2.0">
+<workbench progressCount="31" version="2.0">
 <workbenchAdvisor/>
 <window height="768" maximized="true" width="1024" x="225" y="225">
 <fastViewData fastViewLocation="1024"/>
@@ -18,7 +18,7 @@
 <coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="99" y="22"/>
 <coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="130" y="22"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="61" y="22"/>
+<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="190" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
@@ -46,9 +46,9 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Binary Bog/src/com/zxtodaro/binarybog/Play.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="4335" selectionTopPixel="1627"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Environment.java" partName="Environment.java" path="T:/BinaryBog/Binary Bog/src/com/zxtodaro/binarybog/Environment.java" title="Environment.java" tooltip="Binary Bog/src/com/zxtodaro/binarybog/Environment.java" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Environment.java" partName="Environment.java" path="T:/BinaryBog/Binary Bog/src/com/zxtodaro/binarybog/Environment.java" title="Environment.java" tooltip="Binary Bog/src/com/zxtodaro/binarybog/Environment.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Binary Bog/src/com/zxtodaro/binarybog/Environment.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2337" selectionTopPixel="1046"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1560" selectionTopPixel="371"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="EnvThread.java" partName="EnvThread.java" path="T:/BinaryBog/Binary Bog/src/com/zxtodaro/binarybog/EnvThread.java" title="EnvThread.java" tooltip="Binary Bog/src/com/zxtodaro/binarybog/EnvThread.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Binary Bog/src/com/zxtodaro/binarybog/EnvThread.java"/>
@@ -58,7 +58,7 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Binary Bog/src/com/zxtodaro/binarybog/Frog.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="666" selectionTopPixel="491"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Lilypad.java" partName="Lilypad.java" path="T:/BinaryBog/Binary Bog/src/com/zxtodaro/binarybog/Lilypad.java" title="Lilypad.java" tooltip="Binary Bog/src/com/zxtodaro/binarybog/Lilypad.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Lilypad.java" partName="Lilypad.java" path="T:/BinaryBog/Binary Bog/src/com/zxtodaro/binarybog/Lilypad.java" title="Lilypad.java" tooltip="Binary Bog/src/com/zxtodaro/binarybog/Lilypad.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Binary Bog/src/com/zxtodaro/binarybog/Lilypad.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="557" selectionTopPixel="0"/>
 </editor>
@@ -70,8 +70,7 @@
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
-<category IMemento.internal.id="Warnings"/>
-<category IMemento.internal.id="Errors"/>
+<category IMemento.internal.id="Warnings (35 items)"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="90" org.eclipse.ui.ide.markerType="90" org.eclipse.ui.ide.pathField="120" org.eclipse.ui.ide.resourceField="90" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -288,13 +287,9 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" path="/Binary Bog/res/layout/game.xml"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Binary Bog/src/com/zxtodaro/binarybog/Frog.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Binary Bog/src/com/zxtodaro/binarybog/Lilypad.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Binary Bog/src/com/zxtodaro/binarybog/Frog.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Binary Bog/src/com/zxtodaro/binarybog/Environment.java"/>
 </editors>
-<item historyLabel="Play.java" index="1">
-<position info="not_deleted" x="3692" y="0"/>
-</item>
-<item historyLabel="EnvThread.java" index="3">
-<position info="not_deleted" x="806" y="7"/>
-</item>
 <item historyLabel="Lilypad.java" index="2">
 <position info="not_deleted" x="1405" y="9"/>
 </item>
@@ -434,8 +429,14 @@
 <item historyLabel="Frog.java" index="5">
 <position info="not_deleted" x="666" y="0"/>
 </item>
-<item active="true" historyLabel="Lilypad.java" index="6">
+<item historyLabel="Lilypad.java" index="6">
 <position info="not_deleted" x="366" y="0"/>
+</item>
+<item historyLabel="Frog.java" index="7">
+<position info="not_deleted" x="666" y="0"/>
+</item>
+<item active="true" historyLabel="Environment.java" index="8">
+<position/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>

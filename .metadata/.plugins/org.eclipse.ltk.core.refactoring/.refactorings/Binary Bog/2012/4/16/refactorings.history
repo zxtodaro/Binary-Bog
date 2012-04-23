@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Binary Bog/res/drawable-hdpi/River_Background2.png&apos; to &apos;river2.png&apos;" description="Rename resource &apos;River_Background2.png&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="res/drawable-hdpi/River_Background2.png" name="river2.png" stamp="1334710011915" updateReferences="true"/>
+</session>

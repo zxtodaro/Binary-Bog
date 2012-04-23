@@ -54,9 +54,6 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 		c.drawRect(0, 0, (getWidth() / 8 * 1), getHeight(), land);
 		c.drawRect((getWidth() / 8 * 7), 0, getWidth(), getHeight(), land);
 		
-		//draw player frog
-		frog.doDraw(c);
-		
 		synchronized(lilypads) {
 			if (lilypads.size() > 0) {
 				for (Iterator<Lilypad> i = lilypads.iterator(); i.hasNext();) {
@@ -64,6 +61,9 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 				}
 			}
 		}
+		
+		//draw frog player
+			frog.doDraw(c);
 	}
 	
 	
@@ -96,16 +96,18 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 
 	
 	public void animate(long runTime) {
-		
-		if (frog.isHopped()) {
-			frog.animation(runTime);
-		}
 		synchronized(lilypads) {
 			if (lilypads.size() > 0) {
 				for (Iterator<Lilypad> i = lilypads.iterator(); i.hasNext();) {
 					i.next().animation(runTime);
 				}
 			}
+		}
+		
+		synchronized(frog) {
+		if (frog.isHopped()) {
+			frog.animation(runTime);
+		}
 		}
 	}
 	

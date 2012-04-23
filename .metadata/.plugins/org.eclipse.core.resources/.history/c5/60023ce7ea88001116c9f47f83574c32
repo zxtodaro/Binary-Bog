@@ -1,0 +1,128 @@
+package com.zxtodaro.binarybog;
+
+import java.util.ArrayList;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.util.Log;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+
+public class Environment extends SurfaceView implements SurfaceHolder.Callback {
+	//declare height and width
+	public static float height;
+	public static float width;
+	
+	//declare left & right boundary
+	public static float lBound;
+	public static float rBound;
+	
+	//Background image
+	private Bitmap background;
+	
+	//declare thread
+	private EnvThread thread;
+	
+	//paint for land
+	private Paint land;
+	
+	//declare player
+	public Frog frog;
+	
+	//create array to hold lilypads
+	public ArrayList<Lilypad> lilypads = new ArrayList<Lilypad>();
+	
+	//constructor
+	public Environment(Context context) {
+		super(context);
+		getHolder().addCallback(this);
+		thread = new EnvThread(this);
+	}
+	
+	
+	public void doDraw(Canvas c) {
+		Log.i("draw", "The Screen has been drawn");
+		
+		land = new Paint();
+		background = new Bitmap();
+		bmp = BitmapFactory.decodeResource(R.drawable.frog_player);
+		//set land color
+		land.setColor(Color.parseColor("#8B4726"));
+		
+		//draw river for background
+		c.drawBitmap(background, lBound, rBound, null);
+		
+		//draw land rectangles
+		c.drawRect(0, 0, (getWidth() / 8 * 1), getHeight(), land);
+		c.drawRect((getWidth() / 8 * 7), 0, getWidth(), getHeight(), land);
+		
+		//draw player frog
+		frog.doDraw(c);
+	}
+	
+	public void surfaceCreated(SurfaceHolder holder) {
+		width = this.getWidth();
+		height = this.getHeight();
+		
+		lBound = (width / 8) * 1;
+		rBound = (width /8) * 7;
+		frog = new Frog(getResources(), (int)(width / 2), (int)(height));
+		if (!thread.isAlive()) {
+			thread = new EnvThread(this);
+			thread.setRun(true);
+			thread.start();
+			
+		}
+		Play.setSurface();
+		
+	}
+
+
+
+	public void surfaceChanged(SurfaceHolder holder, int format, int width,
+			int height) {
+		
+	}
+	
+
+	public void surfaceDestroyed(SurfaceHolder holder) {
+		if (thread.isAlive()) {
+			thread.setRun(false);
+		}
+	}
+
+	//check land value
+	public Paint getLand() {
+		return land;
+	}
+
+	//set land value
+	public void setLand(Paint land) {
+		this.land = land;
+	}
+
+	//check left boundary
+	public float getlBound() {
+		return lBound;
+	}
+
+	//set left boundary
+	public void setlBound(float lBound) {
+		this.lBound = lBound;
+	}
+
+	//check right boundary
+	public float getrBound() {
+		return rBound;
+	}
+
+	//set right boundary
+	public void setrBound(float rBound) {
+		this.rBound = rBound;
+	}
+		
+}

@@ -1,0 +1,47 @@
+package com.zxtodaro.binarybog;
+
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.os.Handler;
+import android.view.SurfaceHolder;
+
+public class EnvThread extends Thread {
+	
+	private Environment gameEnv;
+	private Context mContext;
+	private SurfaceHolder mSurfHolder;
+	private boolean run = false;
+	private Handler mHandle;
+	private Bitmap mBackround;
+	
+	
+	//Constructor
+	public EnvThread(SurfaceHolder surfHolder, Context c, Handler h) {
+		mSurfHolder = gameEnv.getHolder();
+		mHandle = h;
+		mContext = c;
+		Resources mRes = mContext.getResources();
+		
+		mBackground = BitmapFactory.decodeResource(mRes,R.drawable.river);
+		
+		
+	}
+	
+	public void setRun(boolean running) {
+		run = running;
+	}
+
+	@Override
+	public void run() {
+		Canvas c = null;
+		while (run) {
+			c = mSurfHolder.lockCanvas();
+			
+		}
+		
+	}
+	
+}

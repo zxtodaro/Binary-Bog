@@ -1,32 +1,42 @@
 package com.zxtodaro.binarybog;
 
 import java.util.Iterator;
+import java.util.Random;
 
 import android.app.Activity;
-import android.graphics.Color;
+import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
 	public class Play extends Activity implements OnTouchListener {
 		
 		Environment gameEnv;
 		Thread playThread;
-		static int loopSpeed = 20;
-		private int lilypadSpawnRate = 100;	
+		static int loopSpeed = 45;
+		private int lilypadSpawnRate = 150;	
 		//time since last lilypad
 		private int lilypadSplit = 0;
 		//track lilypads on screen
 		private int lilypadCount = 0;
-		
+		//integer value of the number to convert
+		private int intConvert;	
+		//string value of winning number(int)
+		private String strConvert;	
+		//string value of number(bin)
+		private String strConverted;	
+		//String to hold guesses
+		private String guess;
+		//random number generator
+		private Random r;
+
 		
 		//(re) initialize all starting variables
 		static boolean hasSurface = false;
@@ -36,14 +46,11 @@ import android.widget.TextView;
 		boolean gameOver = false;
 		//how many iterations of the game loop have completed
 		private int runTime = 0;
-		//what is the player's score
-		private int score = 0;
 		
 		
 		//constructor
 		public Play() {
 			super();
-			score = 0;
 		}
 		
 		
@@ -70,6 +77,23 @@ import android.widget.TextView;
 			
 			//point action listener to this instance of Environment
 			gameEnv.setOnTouchListener(this);
+			
+			//instantiate random number generator
+			r = new Random();
+			
+			//create number to be converted
+			intConvert = r.nextInt(10);
+
+			//instantiate and set the value of the number to be converted
+			strConvert = String.valueOf(intConvert);
+			
+			//convert number to binary string
+			strConverted = Integer.toBinaryString(intConvert);
+			
+			//set the initial guess to empty string
+			gameEnv.setGuess("");
+			
+			gameEnv.setGameValues(intConvert,strConvert,strConverted);
 			
 		}
 		
@@ -109,7 +133,7 @@ import android.widget.TextView;
 					lilypadMaker();
 				}
 			}
-			/**see runTime() line **/
+			//increase runTime
 			runTime();
 			
 		}
@@ -129,7 +153,7 @@ import android.widget.TextView;
 			}
 			
 			//loop through each lilypad and see if it has gone off screen
-			//if it has remove it from the array and decrement lilypad on screen count
+			//if it has, remove it from the array and decrement lilypad on screen count
 			synchronized(gameEnv.lilypads) {
 				for (Iterator<Lilypad> i = gameEnv.lilypads.iterator(); i.hasNext();) {
 					Lilypad listItem = i.next();
@@ -164,16 +188,19 @@ import android.widget.TextView;
 						gameEnv.frog.setY(listItem.getY());
 						
 						//if player hops and has not hopped before, change hopped to true
-						if (gameEnv.frog.isHopped() == false) {
+						if (!gameEnv.frog.isHopped()) {
 							gameEnv.frog.setHopped(true);
 						}
 						
 						if (listItem.isOne()) {
 							Log.i("boolean","I'm a one");
+							gameEnv.setGuess(gameEnv.getGuess() + "1");
 						}
 						else {
 							Log.i("boolean", "I'm a zero");
+							gameEnv.setGuess(gameEnv.getGuess() + "0");
 						}
+						checkWin();
 					}
 				}
 
@@ -196,6 +223,8 @@ import android.widget.TextView;
 		
 	}
 	
+	
+	
 	protected void onResume() {
 		super.onResume();
 		
@@ -204,5 +233,22 @@ import android.widget.TextView;
 			playThread.start();
 			
 		}
+	}
+
+	//check if the player has the correct solution
+	protected void checkWin() {
+		Context ct = getApplicationContext();
+		if (gameEnv.getGuess().equals(gameEnv.getStrConverted())) {
+			Toast won = Toast.makeText(ct, "You've found the solution!", 5);
+			won.setGravity(Gravity.CENTER, 0, 0);
+			won.show();
+			gameEnv.incrementScore();
+			setGameOver(true);
+			
+		}
+	}
+	
+	public void setGameOver(boolean b) {
+		gameOver = b;
 	}
 }

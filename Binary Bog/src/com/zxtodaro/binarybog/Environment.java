@@ -2,16 +2,21 @@ package com.zxtodaro.binarybog;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
+import android.R.color;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Align;
+import android.graphics.Paint.Style;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.TextView;
 
 public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 	//declare height and width
@@ -31,8 +36,26 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 	//paint for land
 	private Paint land;
 	
+	//paint for HUD
+	private Paint text;
+	
 	//declare player
 	public Frog frog;
+	
+	//what is the player's score
+	private int score = 0;
+	
+	//integer value of the number to convert
+	private int intConvert;
+	
+	//string value of winning number(decimal)
+	private String strConvert;
+	
+	//string value of number(bin)
+	private String strConverted;
+	
+	//String to hold guesses
+	private String guess;
 	
 	//create array to hold lilypads
 	public ArrayList<Lilypad> lilypads = new ArrayList<Lilypad>();
@@ -64,6 +87,11 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 		
 		//draw frog player
 			frog.doDraw(c);
+
+			c.drawText(strConvert, c.getWidth()/16 * 1, c.getHeight()/15*1, text);
+			c.drawText(strConverted, c.getWidth() / 8 * 7, c.getHeight() / 15 * 1, text);
+			c.drawText(guess, c.getWidth() / 8 * 7, c.getHeight() / 15 * 13, text);
+			
 	}
 	
 	
@@ -76,12 +104,22 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 		//instantiate background & set to drawable
 		background = BitmapFactory.decodeResource(getResources(), R.drawable.river2);
 		
-		//instantiate land
+		//instantiate paint for land
 		land = new Paint();
 		
 		//set land color
-		land.setColor(Color.parseColor("#8B4726"));
+		land.setColor(Color.parseColor("#8B4500"));
 		
+		//instantiate paint for HUD
+		text = new Paint();
+		
+		//set values for HUD paint
+		text.setColor(Color.BLACK);
+		text.setTextAlign(Align.LEFT);
+		text.setStyle(Style.FILL);
+		text.setTextSize(65);
+		
+		//instantiate frog for player token
 		frog = new Frog(getResources(), (int)(width / 2), (int)(height));
 		
 		if (!thread.isAlive()) {
@@ -153,5 +191,42 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 	public void setrBound(float rBound) {
 		this.rBound = rBound;
 	}
-		
+	
+	//increase score if won
+	public void incrementScore() {
+		score += 1;
+	}
+	
+	//check score
+	public int getScore() {
+		return score;
+	}
+	
+	//check for solution as string
+	public String getStrConverted() {
+		return strConverted;
+	}
+
+	//set the solution as a string
+	public void setStrConverted(String strConverted) {
+		this.strConverted = strConverted;
+	}
+
+	//guess as a string
+	public String getGuess() {
+		return guess;
+	}
+
+	//set guess as a string
+	public void setGuess(String guess) {
+		this.guess = guess;
+	}
+
+	//set values for game
+	public void setGameValues(int intCon, String strCon,
+			String strCond) {
+		this.intConvert = intCon;
+		this.strConvert = strCon;
+		this.strConverted = strCond;
+	}
 }

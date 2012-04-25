@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="com.linden.sp"
+      android:versionCode="1"
+      android:versionName="1.0">
+    <uses-sdk android:minSdkVersion="8" />
+
+    <application 
+    	android:icon="@drawable/icon" 
+    	android:label="@string/app_name">
+<!-- Splash -->
+		<activity android:name=".SeniorProjectActivity"
+                  android:label="@string/app_name"
+                  android:screenOrientation="landscape"
+                  android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+<!-- Main Menu -->
+        <activity android:name=".MainMenu"
+                  android:label="@string/app_name"
+                  android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.CLEARSCREEN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+ <!-- Career -->
+         <activity android:name=".Career"
+                  android:label="@string/app_name"
+                  android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.CAREER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+ <!-- Survival -->
+         <activity android:name=".Survival"
+                  android:label="@string/app_name"
+                  android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.SURVIVAL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+ <!-- Car Select -->
+          <activity android:name=".CarSelect"
+                  android:label="@string/app_name"
+                  android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.CARSELECT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+ <!-- Help -->
+         <activity android:name=".Help"
+                  android:label="@string/app_name"
+                  android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.HELP" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>  
+              
+ <!-- Settings -->       
+           <activity android:name=".Settings"
+                  android:label="@string/app_name"
+                  android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+ 
+ 
+ <!-- About -->      
+		<activity android:name=".About"
+                  android:label="@string/app_name"
+                  android:theme="@android:style/Theme.Dialog">
+            <intent-filter>
+                <action android:name="android.intent.action.ABOUT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+ <!-- Finish -->
+ 		<activity android:name="Finish"
+                  android:label="@string/app_name"
+                  android:theme="@android:style/Theme.Dialog">
+            <intent-filter>
+                <action android:name="android.intent.action.FINISH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+ <!-- Engine -->
+ 		<activity android:name=".game.Engine"
+                  android:label="@string/app_name"
+                  android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.game.Engine" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+ 
+ 
+    </application>
+</manifest>

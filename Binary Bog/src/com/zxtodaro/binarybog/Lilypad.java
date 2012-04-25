@@ -38,7 +38,7 @@ public class Lilypad {
 			bmp = BitmapFactory.decodeResource(res, R.drawable.lilypad2);
 		}
 		else {
-			bmp = BitmapFactory.decodeResource(res, R.drawable.lilypad1);
+			bmp = BitmapFactory.decodeResource(res, R.drawable.lilypad3);
 		}
 		
 		//set travel lane

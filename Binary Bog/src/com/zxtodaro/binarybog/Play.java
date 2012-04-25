@@ -20,7 +20,9 @@ import android.widget.Toast;
 		
 		Environment gameEnv;
 		Thread playThread;
+		//game speed
 		static int loopSpeed = 45;
+		//spawn rate of lilypads
 		private int lilypadSpawnRate = 150;	
 		//time since last lilypad
 		private int lilypadSplit = 0;
@@ -93,7 +95,7 @@ import android.widget.Toast;
 			//set the initial guess to empty string
 			gameEnv.setGuess("");
 			
-			gameEnv.setGameValues(intConvert,strConvert,strConverted);
+			gameEnv.setGameValues(intConvert, strConvert,strConverted);
 			
 		}
 		

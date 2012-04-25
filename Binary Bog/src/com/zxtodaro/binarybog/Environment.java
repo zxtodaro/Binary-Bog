@@ -18,6 +18,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.TextView;
 
+
+/*DECLARE ALL VARIABLES&PROPERTIES*/
 public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 	//declare height and width
 	public static float height;
@@ -67,7 +69,7 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 		thread = new EnvThread(this);
 	}
 	
-	
+	/*THIS IS WHERE ALL DRAWING TO THE CANVAS TAKES PLACE*/
 	public void doDraw(Canvas c) {
 		
 		//draw river for background
@@ -84,17 +86,17 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 				}
 			}
 		}
-		
-		//draw frog player
-			frog.doDraw(c);
 
 			c.drawText(strConvert, c.getWidth()/16 * 1, c.getHeight()/15*1, text);
 			c.drawText(strConverted, c.getWidth() / 8 * 7, c.getHeight() / 15 * 1, text);
 			c.drawText(guess, c.getWidth() / 8 * 7, c.getHeight() / 15 * 13, text);
 			
+			//draw frog player
+			frog.doDraw(c);
+			
 	}
 	
-	
+	/*THIS IS WHERE PLAY RECEIVES THE SURFACE FROM ENVIRONMENT AND THE ENVIRONMENT THREAD IS STARTED*/
 	public void surfaceCreated(SurfaceHolder holder) {
 		width = this.getWidth();
 		height = this.getHeight();
@@ -102,7 +104,7 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 		rBound = (width / 8) * 7;
 		
 		//instantiate background & set to drawable
-		background = BitmapFactory.decodeResource(getResources(), R.drawable.river2);
+		background = BitmapFactory.decodeResource(getResources(), R.drawable.river);
 		
 		//instantiate paint for land
 		land = new Paint();
@@ -132,8 +134,10 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 		
 	}
 
-	
+	/*THIS IS WHERE ALL ANIMATION MUST TAKE PLACE*/
 	public void animate(long runTime) {
+		
+		//animate the lilypads
 		synchronized(lilypads) {
 			if (lilypads.size() > 0) {
 				for (Iterator<Lilypad> i = lilypads.iterator(); i.hasNext();) {
@@ -142,20 +146,24 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 			}
 		}
 		
+		//animate the frog
 		synchronized(frog) {
+			//if the frog is at initial position don't animate
 		if (frog.isHopped()) {
+			//if he has moved animate him
 			frog.animation(runTime);
 		}
 		}
 	}
 	
+	//If the surface changes recalculate height and width
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
 		width = this.getWidth();
 		height = this.getHeight();
 	}
 	
-
+	//if the surface is destroyed stop the thread from running
 	public void surfaceDestroyed(SurfaceHolder holder) {
 		if (thread.isAlive()) {
 			thread.setRun(false);
@@ -223,9 +231,8 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 	}
 
 	//set values for game
-	public void setGameValues(int intCon, String strCon,
+	public void setGameValues(int intConvert, String strCon,
 			String strCond) {
-		this.intConvert = intCon;
 		this.strConvert = strCon;
 		this.strConverted = strCond;
 	}

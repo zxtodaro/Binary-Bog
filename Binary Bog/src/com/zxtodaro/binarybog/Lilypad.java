@@ -32,13 +32,25 @@ public class Lilypad {
 		
 		//Randomly create one or zero
 		boolean b = r.nextBoolean();
+		boolean bmpB = r.nextBoolean();
 		
 		//instantiate and set bmp for lilypad
+		//set lilypad bitmap to 1 or 2 if random boolean is true (1), set it to 3 or 4 if random boolean is false
 		if (b) {
-			bmp = BitmapFactory.decodeResource(res, R.drawable.lilypad2);
+			if (bmpB) { 
+			bmp = BitmapFactory.decodeResource(res, R.drawable.lilypad1);
+			}
+			else {
+				bmp = BitmapFactory.decodeResource(res, R.drawable.lilypad2);
+			}
 		}
 		else {
+			if (bmpB) {
 			bmp = BitmapFactory.decodeResource(res, R.drawable.lilypad3);
+			}
+			else {
+				bmp = BitmapFactory.decodeResource(res, R.drawable.lilypad4);
+			}
 		}
 		
 		//set travel lane

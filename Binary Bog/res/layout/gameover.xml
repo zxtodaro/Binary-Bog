@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menu_background"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="false"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="250dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/Retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha=".86"
+            android:background="@drawable/button"
+            android:gravity="center_vertical"
+            android:onClick="gotoRetry"
+            android:text="Retry"
+            android:textColor="#000000"
+            android:textSize="32dp" />
+
+        <Button
+            android:id="@+id/MainMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha=".86"
+            android:background="@drawable/button"
+            android:gravity="fill_vertical"
+            android:onClick="gotoMainMenu"
+            android:text="Main Menu"
+            android:textColor="#000000"
+            android:textSize="32dp" />
+
+        <Button
+            android:id="@+id/Help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha=".86"
+            android:background="@drawable/button"
+            android:gravity="center_vertical"
+            android:onClick="gotoTutorial"
+            android:text="Help"
+            android:textColor="#000000"
+            android:textSize="32dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/Score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/linearLayout1"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginRight="208dp"
+        android:layout_marginTop="45dp"
+        android:textColor="#000000"
+         android:textSize="25dp"
+        android:text="Score: " />
+
+    <TextView
+        android:id="@+id/Level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Score"
+        android:layout_alignBottom="@+id/Score"
+        android:layout_alignLeft="@+id/linearLayout1"
+        android:layout_marginLeft="209dp"
+        android:textColor="#000000"
+         android:textSize="25dp"
+        android:text="Level: " />
+
+</RelativeLayout>

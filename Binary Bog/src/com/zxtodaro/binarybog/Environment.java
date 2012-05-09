@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
+import android.graphics.Rect;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -40,12 +41,16 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 	
 	//paint for HUD
 	private Paint text;
+	private Paint label;
 	
 	//declare player
 	public Frog frog;
 	
-	//what is the player's score
-	private int score = 0;
+	//player's score
+	private int score;
+	
+	//player's game set
+	private int level;
 	
 	//integer value of the number to convert
 	private int intConvert;
@@ -87,9 +92,13 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 			}
 		}
 
-			c.drawText(strConvert, c.getWidth()/16 * 1, c.getHeight()/15*1, text);
-			c.drawText(strConverted, c.getWidth() / 8 * 7, c.getHeight() / 15 * 1, text);
-			c.drawText(guess, c.getWidth() / 8 * 7, c.getHeight() / 15 * 13, text);
+			//draw HUD information
+			c.drawText("Convert: ", c.getWidth()/16 * 0, c.getHeight() / 15 * 1, label);
+			c.drawText(strConvert, c.getWidth()/16 * 1, c.getHeight() / 15 * 2, text);
+			c.drawText("Score: ", c.getWidth() / 8 * 7, c.getHeight() / 15 * 1, label);
+			c.drawText(String.valueOf(score), c.getWidth() / 8 * 7, c.getHeight() / 15 * 2, text);
+			c.drawText("Guess: ", c.getWidth() / 8 * 7, c.getHeight() / 15 * 13, label);
+			c.drawText(guess, c.getWidth() / 8 * 7, c.getHeight() / 15 * 14, text);
 			
 			//draw frog player
 			frog.doDraw(c);
@@ -114,12 +123,19 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 		
 		//instantiate paint for HUD
 		text = new Paint();
+		label = new Paint();
 		
-		//set values for HUD paint
+		//set values for HUD text
 		text.setColor(Color.BLACK);
 		text.setTextAlign(Align.LEFT);
 		text.setStyle(Style.FILL);
-		text.setTextSize(65);
+		text.setTextSize(55);
+		
+		//set values for HUD label
+		label.setColor(Color.BLACK);
+		label.setTextAlign(Align.LEFT);
+		label.setStyle(Style.FILL);
+		label.setTextSize(36);
 		
 		//instantiate frog for player token
 		frog = new Frog(getResources(), (int)(width / 2), (int)(height));
@@ -200,14 +216,43 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 		this.rBound = rBound;
 	}
 	
+	//check score
+	public int getScore() {
+		return score;
+	}
+	
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
 	//increase score if won
 	public void incrementScore() {
 		score += 1;
 	}
 	
-	//check score
-	public int getScore() {
-		return score;
+	//Reset score
+	public void resetScore() {
+		score = 0;
+	}
+	
+	//get set number
+	public int getLevel() {
+		return level;
+	}
+	
+	//set level
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	
+	//increment set number
+	public void incrementLevel() {
+		level += 1;
+	}
+	
+	//reset set number
+	public void resetLevel() {
+		level = 0;
 	}
 	
 	//check for solution as string

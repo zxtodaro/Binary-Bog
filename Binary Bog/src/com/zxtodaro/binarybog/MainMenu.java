@@ -28,30 +28,32 @@ public class MainMenu extends Activity {
 	
 	
 	}
+		
+	public void gotoPlay(View v) {
+		
+		Button btnPlay = (Button) findViewById(R.id.Play);
+		Intent play = new Intent();
+		play.setClass(v.getContext(), Play.class);
+		startActivityForResult(play,0);
+
+	}
 	
 	public void gotoSettings(View v) {
 			
 		Button btnSettings = (Button) findViewById(R.id.Settings);
-		Intent settings = new Intent(v.getContext(), Settings.class);
+		Intent settings = new Intent();
+		settings.setClass(v.getContext(), Settings.class);
 		startActivityForResult(settings,0);
-
-	}
-	
-	public void gotoGame(View v) {
-		
-		Button btnPlay = (Button) findViewById(R.id.Play);
-		Intent play = new Intent(v.getContext(), Play.class);
-		startActivityForResult(play,0);
 
 	}
 
 	public void gotoAbout(View v) {
 		
 		Button btnAbout = (Button) findViewById(R.id.About);
-		Intent about = new Intent(v.getContext(), About.class);
+		Intent about = new Intent();
+		about.setClass(v.getContext(), About.class);
 		startActivityForResult(about,0);
 
 	}
 	
-
 }

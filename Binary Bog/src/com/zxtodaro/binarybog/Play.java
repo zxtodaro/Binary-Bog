@@ -5,7 +5,9 @@ import java.util.Random;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -14,16 +16,18 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnTouchListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 	public class Play extends Activity implements OnTouchListener {
 		
 		Environment gameEnv;
 		Thread playThread;
-		//game speed
-		static int loopSpeed = 45;
+		//game speed; lower lessens sleep time
+		static int loopSpeed = 25;
+		//higher increases spaw delay
 		//spawn rate of lilypads
-		private int lilypadSpawnRate = 150;	
+		private int lilypadSpawnRate = 90;
 		//time since last lilypad
 		private int lilypadSplit = 0;
 		//track lilypads on screen
@@ -38,6 +42,8 @@ import android.widget.Toast;
 		private String guess;
 		//random number generator
 		private Random r;
+		//music player
+		private static MediaPlayer music;
 
 		
 		//(re) initialize all starting variables
@@ -80,11 +86,47 @@ import android.widget.Toast;
 			//point action listener to this instance of Environment
 			gameEnv.setOnTouchListener(this);
 			
+					
+			music = MediaPlayer.create(getApplicationContext(), R.raw.willowandthelight);
+			music.setLooping(true);
+			
+			music.seekTo(0);
+			music.start();
+			
+			
+			if (getIntent().toString().endsWith(".Play }")) {
+				
+			}
+			
+			else {
+				Bundle bundle = getIntent().getExtras();
+				gameEnv.setScore(bundle.getInt("SCORE"));
+				gameEnv.setLevel(bundle.getInt("LEVEL"));
+				Log.i("Score:",String.valueOf(bundle.getInt("SCORE")));
+			}
+			
 			//instantiate random number generator
 			r = new Random();
 			
 			//create number to be converted
-			intConvert = r.nextInt(10);
+			switch (gameEnv.getLevel()) {
+			case 0:
+				intConvert = r.nextInt(4);
+				break;
+			case 1:
+				intConvert = r.nextInt(8 - 4 + 1) + 4;
+				break;
+			case 2:
+				intConvert = r.nextInt(16 - 8 + 1) + 8;
+				break;
+			case 3:
+				intConvert = r.nextInt(32 - 16 + 1) + 16;
+				break;
+			case 4:
+				intConvert = r.nextInt(64 - 32 + 1) + 32;
+				break;
+			
+			}
 
 			//instantiate and set the value of the number to be converted
 			strConvert = String.valueOf(intConvert);
@@ -95,7 +137,7 @@ import android.widget.Toast;
 			//set the initial guess to empty string
 			gameEnv.setGuess("");
 			
-			gameEnv.setGameValues(intConvert, strConvert,strConverted);
+			gameEnv.setGameValues(intConvert, strConvert, strConverted);
 			
 		}
 		
@@ -141,8 +183,8 @@ import android.widget.Toast;
 		}
 		//creates lilypads and places them in the lilypads array which is instantiated on Environment creation
 		private void lilypadMaker() {
-			//check if enough time has passed to make a lilypad & check if more than 5 lilypads exist on screen
-			if ((runTime - lilypadSplit) > lilypadSpawnRate && (lilypadCount<5)) {
+			//check if enough time has passed to make a lilypad & check if more than 7 lilypads exist on screen
+			if ((runTime - lilypadSplit) > lilypadSpawnRate && (lilypadCount<7)) {
 				synchronized(gameEnv.lilypads) {
 					gameEnv.lilypads.add(new Lilypad(getResources()));
 					
@@ -171,6 +213,8 @@ import android.widget.Toast;
 			}	
 			
 		}
+		
+		
 		
 		//increment runTime
 		private void runTime() {
@@ -216,6 +260,7 @@ import android.widget.Toast;
 	public void onDestroy() {
 		super.onDestroy();
 		hasSurface = false;
+		music.stop();
 		
 	}
 	
@@ -225,7 +270,12 @@ import android.widget.Toast;
 		
 	}
 	
-	
+	protected void onPause() {
+		super.onPause();
+		running = false;
+		music.pause();
+		
+	}
 	
 	protected void onResume() {
 		super.onResume();
@@ -233,6 +283,7 @@ import android.widget.Toast;
 		if(!gameOver) {
 			running = true;
 			playThread.start();
+			music.start();
 			
 		}
 	}
@@ -240,13 +291,65 @@ import android.widget.Toast;
 	//check if the player has the correct solution
 	protected void checkWin() {
 		Context ct = getApplicationContext();
-		if (gameEnv.getGuess().equals(gameEnv.getStrConverted())) {
-			Toast won = Toast.makeText(ct, "You've found the solution!", 5);
-			won.setGravity(Gravity.CENTER, 0, 0);
+		if (gameEnv.getGuess().length() == gameEnv.getStrConverted().length() && gameEnv.getGuess().equals(gameEnv.getStrConverted())) {
+			Toast won = Toast.makeText(ct, "You found the solution!", 5);
+			won.setGravity(Gravity.CENTER, 0, -200);
 			won.show();
-			gameEnv.incrementScore();
-			setGameOver(true);
 			
+			if ((gameEnv.getScore() != 0) && (gameEnv.getScore() % 5 == 0)) {
+				gameEnv.incrementScore();
+				gameEnv.incrementLevel();
+			}
+			
+			else {
+			gameEnv.incrementScore();
+			}
+			
+			//New intent and Bundle
+			Intent cont = new Intent();
+			
+			//Create bundle for continue
+			Bundle bundle = new Bundle();
+			//add to bundle
+			bundle.putInt("SCORE", gameEnv.getScore());
+			bundle.putInt("LEVEL", gameEnv.getLevel());
+			//set intent to continue class
+			cont.setClass(getBaseContext(), Cont.class);
+			//add bundle to intent
+			cont.putExtras(bundle);
+			//set GameOver to stop thread
+			setGameOver(true);
+			//start new activity
+			startActivity(cont);
+		}
+		
+		if (gameEnv.getGuess().length() > gameEnv.getStrConverted().length()) {
+			
+			//instantiate toast and set text
+			Toast lost = Toast.makeText(ct, "You didn't win this time. Try again.", 5);
+			//position toast
+			lost.setGravity(Gravity.CENTER, 0, -200);
+			//show toast
+			lost.show();
+			//reset score due to loss
+			gameEnv.resetScore();
+			
+			//New intent & Bundle
+			Intent gameover = new Intent();
+			
+			//create bundle for retry
+			Bundle bundle = new Bundle();
+			//add to bundle
+			bundle.putInt("SCORE", gameEnv.getScore());
+			bundle.putInt("LEVEL", gameEnv.getLevel());
+			//set intent to gameover class
+			gameover.setClass(getBaseContext(), Gameover.class);
+			//add bundle to intent
+			gameover.putExtras(bundle);
+			//set GameOver to stop thread
+			setGameOver(true);
+			//start new activity
+			startActivity(gameover);
 		}
 	}
 	

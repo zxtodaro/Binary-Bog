@@ -2,7 +2,7 @@
 ############################
 bin
 gen
-
+.metadata/
 # Ignore These File Types  #
 ############################
 *.apk

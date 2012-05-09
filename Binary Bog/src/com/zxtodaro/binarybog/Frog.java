@@ -77,4 +77,8 @@ public class Frog {
 	public void setHopped(boolean hopped) {
 		this.hopped = hopped;
 	}
+	
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
 }

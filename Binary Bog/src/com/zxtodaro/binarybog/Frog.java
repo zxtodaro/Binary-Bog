@@ -30,6 +30,14 @@ public class Frog {
     public void animation(long runTime) {
     		Y += speed * (runTime * 5f);
     }
+    
+    public boolean outOfBounds() {
+        if (Y - bmp.getHeight() >= Environment.height) {
+            return true;
+        }
+        
+        return false;
+    }
 	
 	public float getX() {
 		return X;

@@ -1,18 +1,23 @@
 package com.zxtodaro.binarybog;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Gameover extends Activity {
 	
 		private int level;
 		private int score;
+		private Context ct;
+		private Toast lost;
 
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,14 @@ public class Gameover extends Activity {
 			this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 			
 			setContentView(R.layout.gameover);
+			
+			//Set application context and set toast text
+			ct = getApplicationContext();
+			lost = Toast.makeText(ct, "You didn't win this time. Try again.", 5);
+			//position toast
+			lost.setGravity(Gravity.CENTER, 0, -200);
+			//show toast
+			lost.show();
 			
 			Bundle bundle = getIntent().getExtras();
 			score = bundle.getInt("SCORE");

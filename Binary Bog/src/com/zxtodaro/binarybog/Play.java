@@ -210,10 +210,38 @@ import android.widget.Toast;
 						lilypadSplit = 0;
 					}
 				}
-			}	
+			}
+						
+						
+			//loop through each lilypad and see if it has gone off screen
+			//if it has, remove it from the array and decrement lilypad on screen count
+			synchronized(gameEnv.frog) {
+					
+					if (gameEnv.frog.outOfBounds()) {
+						//reset score due to loss
+						gameEnv.resetScore();						
+						
+						//New intent & Bundle
+						Intent gameover = new Intent();
+						
+						//create bundle for retry
+						Bundle bundle = new Bundle();
+						//add to bundle
+						bundle.putInt("SCORE", gameEnv.getScore());
+						bundle.putInt("LEVEL", gameEnv.getLevel());
+						//set intent to gameover class
+						gameover.setClass(getBaseContext(), Gameover.class);
+						//add bundle to intent
+						gameover.putExtras(bundle);
+						//set GameOver to stop thread
+						setGameOver(true);
+						//start new activity
+						startActivity(gameover);
+					}
+
+			}
 			
 		}
-		
 		
 		
 		//increment runTime
@@ -324,15 +352,6 @@ import android.widget.Toast;
 		}
 		
 		if (gameEnv.getGuess().length() > gameEnv.getStrConverted().length()) {
-			
-			//instantiate toast and set text
-			Toast lost = Toast.makeText(ct, "You didn't win this time. Try again.", 5);
-			//position toast
-			lost.setGravity(Gravity.CENTER, 0, -200);
-			//show toast
-			lost.show();
-			//reset score due to loss
-			gameEnv.resetScore();
 			
 			//New intent & Bundle
 			Intent gameover = new Intent();

@@ -90,6 +90,9 @@ import android.widget.Toast;
 			
 					
 			music = MediaPlayer.create(getApplicationContext(), R.raw.willowandthelight);
+			/* 
+			"Willow and the Light" Kevin MacLeod (incompetech.com) Licensed under Creative Commons "Attribution 3.0" http://creativecommons.org/licenses/by/3.0/
+			*/
 			music.setLooping(true);
 			
 			music.seekTo(0);

@@ -13,6 +13,7 @@ public class Cont extends Activity {
 	
 	private int level;
 	private int score;
+	private int mode;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,8 @@ public class Cont extends Activity {
 		Bundle bundle = getIntent().getExtras();
 		score = bundle.getInt("SCORE");
 		level = bundle.getInt("LEVEL");
+		mode = bundle.getInt("MODE");
+		
 		
 		TextView tvScore = (TextView) findViewById(R.id.Score);
 		TextView tvLevel = (TextView) findViewById(R.id.Level);
@@ -50,6 +53,7 @@ public class Cont extends Activity {
 		//add to bundle
 		bundle.putInt("SCORE", score);
 		bundle.putInt("LEVEL", level);
+		bundle.putInt("MODE", mode);
 		//register button
 		Button btnContinue = (Button) findViewById(R.id.Continue);
 		//add bundle to intent

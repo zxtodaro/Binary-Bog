@@ -1,4 +1,6 @@
+/* 
 package com.zxtodaro.binarybog;
+
 
 import android.app.Activity;
 import android.content.Intent;
@@ -28,3 +30,4 @@ public class Settings extends Activity {
 	
 
 }
+*/

@@ -60,7 +60,7 @@
         android:layout_marginRight="208dp"
         android:layout_marginTop="45dp"
         android:textColor="#000000"
-         android:textSize="25dp"
+        android:textSize="25dp"
         android:text="Score: " />
 
     <TextView
@@ -72,7 +72,29 @@
         android:layout_alignLeft="@+id/linearLayout1"
         android:layout_marginLeft="209dp"
         android:textColor="#000000"
-         android:textSize="25dp"
+        android:textSize="25dp"
         android:text="Level: " />
+
+    <TextView
+        android:id="@+id/Convert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="122dp"
+        android:textColor="#000000"
+        android:textSize="25dp"
+        android:text="Convert: " />
+
+    <TextView
+        android:id="@+id/Solution"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Convert"
+        android:layout_alignTop="@+id/Convert"
+        android:layout_marginTop="61dp"
+        android:text="Solution: "
+        android:textColor="#000000"
+        android:textSize="25dp" />
 
 </RelativeLayout>

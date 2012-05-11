@@ -25,7 +25,7 @@ import android.widget.Toast;
 		Thread playThread;
 		//game speed; lower lessens sleep time
 		static int loopSpeed = 25;
-		//higher increases spaw delay
+		//higher increases spawn delay
 		//spawn rate of lilypads
 		private int lilypadSpawnRate = 90;
 		//time since last lilypad
@@ -44,6 +44,8 @@ import android.widget.Toast;
 		private Random r;
 		//music player
 		private static MediaPlayer music;
+		//game mode(binary, octal, etc.)
+		private int mode;
 
 		
 		//(re) initialize all starting variables
@@ -93,46 +95,82 @@ import android.widget.Toast;
 			music.seekTo(0);
 			music.start();
 			
-			
-			if (getIntent().toString().endsWith(".Play }")) {
+			//check if play was called on by activity
+			if (getIntent().toString().endsWith(".Play (has extras) }")) {
+				Bundle bundle = getIntent().getExtras();
+				mode = bundle.getInt("MODE");
+				gameEnv.setScore(bundle.getInt("SCORE"));
+				gameEnv.setLevel(bundle.getInt("LEVEL"));
+				Log.i("Mode: ", String.valueOf(mode));
 				
 			}
 			
 			else {
 				Bundle bundle = getIntent().getExtras();
+				mode = bundle.getInt("MODE");
 				gameEnv.setScore(bundle.getInt("SCORE"));
 				gameEnv.setLevel(bundle.getInt("LEVEL"));
 				Log.i("Score:",String.valueOf(bundle.getInt("SCORE")));
+				Log.i("Intent: ", String.valueOf(getIntent()));
 			}
 			
 			//instantiate random number generator
 			r = new Random();
 			
-			//create number to be converted
-			switch (gameEnv.getLevel()) {
-			case 0:
-				intConvert = r.nextInt(4);
-				break;
-			case 1:
-				intConvert = r.nextInt(8 - 4 + 1) + 4;
-				break;
-			case 2:
-				intConvert = r.nextInt(16 - 8 + 1) + 8;
-				break;
-			case 3:
-				intConvert = r.nextInt(32 - 16 + 1) + 16;
-				break;
-			case 4:
-				intConvert = r.nextInt(64 - 32 + 1) + 32;
-				break;
 			
+			if (mode == 0) {
+				
+				//create number to be converted
+				switch (gameEnv.getLevel()) {
+				case 0:
+					intConvert = r.nextInt(4);
+					break;
+				case 1:
+					intConvert = r.nextInt(8 - 4 + 1) + 4;
+					break;
+				case 2:
+					intConvert = r.nextInt(16 - 8 + 1) + 8;
+					break;
+				case 3:
+					intConvert = r.nextInt(32 - 16 + 1) + 16;
+					break;
+				case 4:
+					intConvert = r.nextInt(64 - 32 + 1) + 32;
+					break;
+				
+				}
+				
+				//convert number to binary string
+				strConverted = Integer.toBinaryString(intConvert);
+				
 			}
-
+			
+			else if (mode == 1) {
+				switch (gameEnv.getLevel()) {
+				case 0:
+					intConvert = r.nextInt(16);
+					break;
+				case 1:
+					intConvert = r.nextInt(32 - 16 + 1) + 16;
+					break;
+				case 2:
+					intConvert = r.nextInt(40 - 32 + 1) + 32;
+					break;
+				case 3:
+					intConvert = r.nextInt(48 - 32 + 1) + 32;
+					break;
+				case 4:
+					intConvert = r.nextInt(64 - 40 + 1) + 40;
+					break;
+				
+				}
+				//convert number to octal string
+				strConverted = Integer.toOctalString(intConvert);
+				
+			}
+			
 			//instantiate and set the value of the number to be converted
 			strConvert = String.valueOf(intConvert);
-			
-			//convert number to binary string
-			strConverted = Integer.toBinaryString(intConvert);
 			
 			//set the initial guess to empty string
 			gameEnv.setGuess("");
@@ -173,7 +211,7 @@ import android.widget.Toast;
 			if (running) {	
 				//check if surface has been created
 				if (hasSurface) {
-					//make lilypads until game is over
+					//make lilypads until game is no longer running
 					lilypadMaker();
 				}
 			}
@@ -181,12 +219,13 @@ import android.widget.Toast;
 			runTime();
 			
 		}
+		
 		//creates lilypads and places them in the lilypads array which is instantiated on Environment creation
 		private void lilypadMaker() {
 			//check if enough time has passed to make a lilypad & check if more than 7 lilypads exist on screen
-			if ((runTime - lilypadSplit) > lilypadSpawnRate && (lilypadCount<7)) {
+			if ((runTime - lilypadSplit) > lilypadSpawnRate && (lilypadCount<9)) {
 				synchronized(gameEnv.lilypads) {
-					gameEnv.lilypads.add(new Lilypad(getResources()));
+					gameEnv.lilypads.add(new Lilypad(getResources(), mode));
 					
 					//set time since last item to runtime(loops passed)
 					lilypadSplit = runTime;
@@ -213,8 +252,7 @@ import android.widget.Toast;
 			}
 						
 						
-			//loop through each lilypad and see if it has gone off screen
-			//if it has, remove it from the array and decrement lilypad on screen count
+			//check if the frog has moved off the screen
 			synchronized(gameEnv.frog) {
 					
 					if (gameEnv.frog.outOfBounds()) {
@@ -229,6 +267,9 @@ import android.widget.Toast;
 						//add to bundle
 						bundle.putInt("SCORE", gameEnv.getScore());
 						bundle.putInt("LEVEL", gameEnv.getLevel());
+						bundle.putInt("MODE", mode);
+						bundle.putString("CONVERT", strConvert);
+						bundle.putString("CONVERTED", strConverted);
 						//set intent to gameover class
 						gameover.setClass(getBaseContext(), Gameover.class);
 						//add bundle to intent
@@ -266,14 +307,45 @@ import android.widget.Toast;
 							gameEnv.frog.setHopped(true);
 						}
 						
-						if (listItem.isOne()) {
-							Log.i("boolean","I'm a one");
-							gameEnv.setGuess(gameEnv.getGuess() + "1");
+						if (mode ==0) {
+							if (listItem.isOne()) {
+								Log.i("boolean","I'm a one");
+								gameEnv.setGuess(gameEnv.getGuess() + "1");
+							}
+							else {
+								Log.i("boolean", "I'm a zero");
+								gameEnv.setGuess(gameEnv.getGuess() + "0");
+							}
 						}
-						else {
-							Log.i("boolean", "I'm a zero");
-							gameEnv.setGuess(gameEnv.getGuess() + "0");
+						else if (mode ==1) {
+							switch (listItem.getValueO()) {
+							case 0: gameEnv.setGuess(gameEnv.getGuess() + "0");
+							Log.i("Value: ", "I'm a zero");
+							break;
+							case 1: gameEnv.setGuess(gameEnv.getGuess() + "1");
+							Log.i("Value: ", "I'm a one");
+							break;
+							case 2: gameEnv.setGuess(gameEnv.getGuess() + "2");
+							Log.i("Value: ", "I'm a two");
+							break;
+							case 3: gameEnv.setGuess(gameEnv.getGuess() + "3");
+							Log.i("Value: ", "I'm a three");
+							break;
+							case 4: gameEnv.setGuess(gameEnv.getGuess() + "4");
+							Log.i("Value: ", "I'm a four");
+							break;
+							case 5: gameEnv.setGuess(gameEnv.getGuess() + "5");
+							Log.i("Value: ", "I'm a five");
+							break;
+							case 6: gameEnv.setGuess(gameEnv.getGuess() + "6");
+							Log.i("Value: ", "I'm a six");
+							break;
+							case 7: gameEnv.setGuess(gameEnv.getGuess() + "7");
+							Log.i("Value: ", "I'm a seven");
+							break;
+							}
 						}
+
 						checkWin();
 					}
 				}
@@ -341,6 +413,7 @@ import android.widget.Toast;
 			//add to bundle
 			bundle.putInt("SCORE", gameEnv.getScore());
 			bundle.putInt("LEVEL", gameEnv.getLevel());
+			bundle.putInt("MODE", mode);
 			//set intent to continue class
 			cont.setClass(getBaseContext(), Cont.class);
 			//add bundle to intent
@@ -361,6 +434,7 @@ import android.widget.Toast;
 			//add to bundle
 			bundle.putInt("SCORE", gameEnv.getScore());
 			bundle.putInt("LEVEL", gameEnv.getLevel());
+			bundle.putInt("MODE", mode);
 			//set intent to gameover class
 			gameover.setClass(getBaseContext(), Gameover.class);
 			//add bundle to intent

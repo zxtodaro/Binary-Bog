@@ -20,7 +20,7 @@ import android.view.SurfaceView;
 import android.widget.TextView;
 
 
-/*DECLARE ALL VARIABLES&PROPERTIES*/
+/*DECLARE ALL VARIABLES & PROPERTIES*/
 public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 	//declare height and width
 	public static float height;
@@ -95,10 +95,10 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 			//draw HUD information
 			c.drawText("Convert: ", c.getWidth()/16 * 0, c.getHeight() / 15 * 1, label);
 			c.drawText(strConvert, c.getWidth()/16 * 1, c.getHeight() / 15 * 2, text);
-			c.drawText("Score: ", c.getWidth() / 8 * 7, c.getHeight() / 15 * 1, label);
-			c.drawText(String.valueOf(score), c.getWidth() / 8 * 7, c.getHeight() / 15 * 2, text);
-			c.drawText("Guess: ", c.getWidth() / 8 * 7, c.getHeight() / 15 * 13, label);
-			c.drawText(guess, c.getWidth() / 8 * 7, c.getHeight() / 15 * 14, text);
+			c.drawText("Score: ", c.getWidth() / 8 * 7, c.getHeight() / 15 * 13, label);
+			c.drawText(String.valueOf(score), c.getWidth() / 8 * 7, c.getHeight() / 15 * 14, text);
+			c.drawText("Guess: ", c.getWidth() / 8 * 7, c.getHeight() / 15 * 1, label);
+			c.drawText(guess, c.getWidth() / 8 * 7, c.getHeight() / 15 * 2, text);
 			
 			//draw frog player
 			frog.doDraw(c);

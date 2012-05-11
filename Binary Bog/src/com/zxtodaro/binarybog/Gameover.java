@@ -16,6 +16,9 @@ public class Gameover extends Activity {
 	
 		private int level;
 		private int score;
+		private int mode;
+		private String convert;
+		private String converted;
 		private Context ct;
 		private Toast lost;
 
@@ -44,14 +47,21 @@ public class Gameover extends Activity {
 			lost.show();
 			
 			Bundle bundle = getIntent().getExtras();
+			mode = bundle.getInt("MODE");
 			score = bundle.getInt("SCORE");
 			level = bundle.getInt("LEVEL");
+			convert = bundle.getString("CONVERT");
+			converted = bundle.getString("CONVERTED");
 			
 			TextView tvScore = (TextView) findViewById(R.id.Score);
 			TextView tvLevel = (TextView) findViewById(R.id.Level);
+			TextView tvConvert = (TextView) findViewById(R.id.Convert);
+			TextView tvSolution = (TextView) findViewById(R.id.Solution);
 			
 			tvScore.setText("Score: " + String.valueOf(score));
 			tvLevel.setText("Level: " + String.valueOf(level));
+			tvConvert.setText("Convert: " + convert);
+			tvSolution.setText("Solution: " + converted);
 		
 		}
 		
@@ -63,6 +73,7 @@ public class Gameover extends Activity {
 			Bundle bundle = new Bundle();
 			//add to bundle
 			bundle.putInt("LEVEL", level);
+			bundle.putInt("MODE", mode);
 			//register button
 			Button btnRetry = (Button) findViewById(R.id.Retry);
 			//add bundle to intent

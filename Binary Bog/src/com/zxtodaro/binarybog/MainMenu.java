@@ -29,16 +29,16 @@ public class MainMenu extends Activity {
 	
 	}
 		
-	public void gotoPlay(View v) {
+	public void gotoSelectMode(View v) {
 		
-		Button btnPlay = (Button) findViewById(R.id.Play);
-		Intent play = new Intent();
-		play.setClass(v.getContext(), Play.class);
-		startActivityForResult(play,0);
+		Button btnSelectMode = (Button) findViewById(R.id.SelectMode);
+		Intent mode = new Intent();
+		mode.setClass(v.getContext(), SelectMode.class);
+		startActivityForResult(mode,0);
 
 	}
 	
-	public void gotoSettings(View v) {
+/*	public void gotoSettings(View v) {
 			
 		Button btnSettings = (Button) findViewById(R.id.Settings);
 		Intent settings = new Intent();
@@ -46,7 +46,7 @@ public class MainMenu extends Activity {
 		startActivityForResult(settings,0);
 
 	}
-
+*/
 	public void gotoAbout(View v) {
 		
 		Button btnAbout = (Button) findViewById(R.id.About);

@@ -23,9 +23,6 @@ public class Lilypad {
 	//octal value
 	private int valueO;
 	
-	//textview of value
-	TextView tvValue;
-	
 	//random number generator for item image, value, and lane
 	private Random r = new Random();
 	
@@ -36,7 +33,7 @@ public class Lilypad {
 	private int laneX;
 	
 	//constructor
-	public Lilypad(Resources res) {
+	public Lilypad(Resources res, int mode) {
 		
 		//Randomly create one or zero
 		valueB = r.nextBoolean();
@@ -45,10 +42,11 @@ public class Lilypad {
 		boolean bmpB = r.nextBoolean();
 		
 		//set octal value
-		valueO = r.nextInt(7);
+		valueO = r.nextInt(8);
 		
+		if (mode == 0) {
 		//instantiate and set bmp for lilypad
-		//set lilypad bitmap to 1 or 2 if random boolean is true (1), set it to 3 or 4 if random boolean is false
+		//set lilypad bitmap based on if random boolean is true (1) or false (0), set it to 3 or 4 if random boolean is false
 		if (valueB) {
 			if (bmpB) { 
 			bmp = BitmapFactory.decodeResource(res, R.drawable.lilypad1);
@@ -65,6 +63,30 @@ public class Lilypad {
 				bmp = BitmapFactory.decodeResource(res, R.drawable.lilypad4);
 			}
 		}
+		}
+		
+		else if (mode == 1) {
+			//set lilypad bitmap based on octal value (valueO)
+			switch (valueO) {
+			case 0: bmp = BitmapFactory.decodeResource(res, R.drawable.lily0);
+			break;
+			case 1: bmp = BitmapFactory.decodeResource(res, R.drawable.lily1);
+			break;
+			case 2: bmp = BitmapFactory.decodeResource(res, R.drawable.lily2);
+			break;
+			case 3: bmp = BitmapFactory.decodeResource(res, R.drawable.lily3);
+			break;
+			case 4: bmp = BitmapFactory.decodeResource(res, R.drawable.lily4);
+			break;
+			case 5: bmp = BitmapFactory.decodeResource(res, R.drawable.lily5);
+			break;
+			case 6: bmp = BitmapFactory.decodeResource(res, R.drawable.lily6);
+			break;
+			case 7: bmp = BitmapFactory.decodeResource(res, R.drawable.lily7);
+			break;
+				}
+		}
+
 		
 		//set travel lane
 		laneX = r.nextInt(8);
@@ -150,7 +172,7 @@ public class Lilypad {
 		this.valueB = one;
 	}
 	//check octal value of lilypad
-	public int isValueO() {
+	public int getValueO() {
 		return valueO;
 	}
 	//check bitmap of lilypad

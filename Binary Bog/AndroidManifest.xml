@@ -30,6 +30,16 @@
             </intent-filter>
         </activity>
         
+        <!-- select mode -->
+        <activity
+            android:name=".SelectMode"
+            android:label="@string/app_name" android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.SELECTMODE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
         <!-- settings -->
         <activity
             android:name=".Settings"
@@ -48,6 +58,16 @@
            	android:theme="@android:style/Theme.Dialog" >
             <intent-filter>
                 <action android:name="android.intent.action.About" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+		<!-- tutorial -->
+        <activity
+            android:name=".Tutorial"
+            android:label="@string/app_name" android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.TUTORIAL" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -78,16 +98,6 @@
             android:label="@string/app_name" android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.CONT" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        
-         <!-- tutorial -->
-        <activity
-            android:name=".Tutorial"
-            android:label="@string/app_name" android:screenOrientation="landscape" >
-            <intent-filter>
-                <action android:name="android.intent.action.TUTORIAL" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

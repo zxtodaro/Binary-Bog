@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/menu_background"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="false"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="200dp"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/PlayBinary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha=".86"
+            android:background="@drawable/button"
+            android:gravity="center_vertical"
+            android:onClick="gotoBinaryPlay"
+            android:text="Binary"
+            android:textColor="#000000"
+            android:textSize="45dp" />
+
+        <Button
+            android:id="@+id/PlayOctal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha=".86"
+            android:background="@drawable/button"
+            android:gravity="fill_vertical"
+            android:onClick="gotoOctalPlay"
+            android:text="Octal"
+            android:textColor="#000000"
+            android:textSize="45dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/Mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="48dp"
+        android:text="Select Game Mode"
+        android:textColor="#000000"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="65dp" />
+
+</RelativeLayout>

@@ -15,10 +15,10 @@ public class Frog {
 	private boolean hopped;
 	private double speed;
 	
-	public Frog (Resources res, int x, int y) {
+	public Frog (Resources res, int X, int Y) {
 		bmp = BitmapFactory.decodeResource(res, R.drawable.frog_player);
-		this.X = x - bmp.getWidth() / 2;
-		this.Y = y - bmp.getHeight();
+		this.X = X - bmp.getWidth() / 2;
+		this.Y = Y - bmp.getHeight();
 		hopped = false;
 		speed = .009;
 	}

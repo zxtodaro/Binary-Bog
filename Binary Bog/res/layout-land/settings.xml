@@ -5,7 +5,7 @@
     android:orientation="horizontal"
     android:text="Settings" >
 
-    <RadioGroup
+ <!--   <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical" 
@@ -52,6 +52,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hexadecimal" />
-    </RadioGroup>
+    </RadioGroup> -->
 
-</LinearLayout>
+</LinearLayout> 

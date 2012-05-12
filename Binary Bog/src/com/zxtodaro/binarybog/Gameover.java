@@ -51,7 +51,7 @@ public class Gameover extends Activity {
 			score = bundle.getInt("SCORE");
 			level = bundle.getInt("LEVEL");
 			convert = bundle.getString("CONVERT");
-			converted = bundle.getString("CONVERTED");
+			converted = bundle.getString("SOLUTION");
 			
 			TextView tvScore = (TextView) findViewById(R.id.Score);
 			TextView tvLevel = (TextView) findViewById(R.id.Level);

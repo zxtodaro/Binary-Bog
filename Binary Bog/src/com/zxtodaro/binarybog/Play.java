@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -37,7 +36,7 @@ import android.widget.Toast;
 		//string value of winning number(int)
 		private String strConvert;	
 		//string value of number(bin)
-		private String strConverted;	
+		private String strSolution;	
 		//String to hold guesses
 		private String guess;
 		//random number generator
@@ -104,7 +103,6 @@ import android.widget.Toast;
 				mode = bundle.getInt("MODE");
 				gameEnv.setScore(bundle.getInt("SCORE"));
 				gameEnv.setLevel(bundle.getInt("LEVEL"));
-				Log.i("Mode: ", String.valueOf(mode));
 				
 			}
 			
@@ -113,8 +111,6 @@ import android.widget.Toast;
 				mode = bundle.getInt("MODE");
 				gameEnv.setScore(bundle.getInt("SCORE"));
 				gameEnv.setLevel(bundle.getInt("LEVEL"));
-				Log.i("Score:",String.valueOf(bundle.getInt("SCORE")));
-				Log.i("Intent: ", String.valueOf(getIntent()));
 			}
 			
 			//instantiate random number generator
@@ -144,7 +140,7 @@ import android.widget.Toast;
 				}
 				
 				//convert number to binary string
-				strConverted = Integer.toBinaryString(intConvert);
+				strSolution = Integer.toBinaryString(intConvert);
 				
 			}
 			
@@ -168,7 +164,7 @@ import android.widget.Toast;
 				
 				}
 				//convert number to octal string
-				strConverted = Integer.toOctalString(intConvert);
+				strSolution = Integer.toOctalString(intConvert);
 				
 			}
 			
@@ -178,7 +174,7 @@ import android.widget.Toast;
 			//set the initial guess to empty string
 			gameEnv.setGuess("");
 			
-			gameEnv.setGameValues(intConvert, strConvert, strConverted);
+			gameEnv.setGameValues(intConvert, strConvert, strSolution);
 			
 		}
 		
@@ -225,7 +221,7 @@ import android.widget.Toast;
 		
 		//creates lilypads and places them in the lilypads array which is instantiated on Environment creation
 		private void lilypadMaker() {
-			//check if enough time has passed to make a lilypad & check if more than 7 lilypads exist on screen
+			//check if enough time has passed to make a lilypad & check if more than 9 lilypads exist on screen
 			if ((runTime - lilypadSplit) > lilypadSpawnRate && (lilypadCount<9)) {
 				synchronized(gameEnv.lilypads) {
 					gameEnv.lilypads.add(new Lilypad(getResources(), mode));
@@ -272,7 +268,7 @@ import android.widget.Toast;
 						bundle.putInt("LEVEL", gameEnv.getLevel());
 						bundle.putInt("MODE", mode);
 						bundle.putString("CONVERT", strConvert);
-						bundle.putString("CONVERTED", strConverted);
+						bundle.putString("CONVERTED", strSolution);
 						//set intent to gameover class
 						gameover.setClass(getBaseContext(), Gameover.class);
 						//add bundle to intent
@@ -310,41 +306,31 @@ import android.widget.Toast;
 							gameEnv.frog.setHopped(true);
 						}
 						
-						if (mode ==0) {
+						if (mode == 0) {
 							if (listItem.isOne()) {
-								Log.i("boolean","I'm a one");
 								gameEnv.setGuess(gameEnv.getGuess() + "1");
 							}
 							else {
-								Log.i("boolean", "I'm a zero");
 								gameEnv.setGuess(gameEnv.getGuess() + "0");
 							}
 						}
-						else if (mode ==1) {
+						else if (mode == 1) {
 							switch (listItem.getValueO()) {
 							case 0: gameEnv.setGuess(gameEnv.getGuess() + "0");
-							Log.i("Value: ", "I'm a zero");
 							break;
 							case 1: gameEnv.setGuess(gameEnv.getGuess() + "1");
-							Log.i("Value: ", "I'm a one");
 							break;
 							case 2: gameEnv.setGuess(gameEnv.getGuess() + "2");
-							Log.i("Value: ", "I'm a two");
 							break;
 							case 3: gameEnv.setGuess(gameEnv.getGuess() + "3");
-							Log.i("Value: ", "I'm a three");
 							break;
 							case 4: gameEnv.setGuess(gameEnv.getGuess() + "4");
-							Log.i("Value: ", "I'm a four");
 							break;
 							case 5: gameEnv.setGuess(gameEnv.getGuess() + "5");
-							Log.i("Value: ", "I'm a five");
 							break;
 							case 6: gameEnv.setGuess(gameEnv.getGuess() + "6");
-							Log.i("Value: ", "I'm a six");
 							break;
 							case 7: gameEnv.setGuess(gameEnv.getGuess() + "7");
-							Log.i("Value: ", "I'm a seven");
 							break;
 							}
 						}
@@ -437,7 +423,9 @@ import android.widget.Toast;
 			//add to bundle
 			bundle.putInt("SCORE", gameEnv.getScore());
 			bundle.putInt("LEVEL", gameEnv.getLevel());
-			bundle.putInt("MODE", mode);
+			
+			bundle.putString("CONVERT", strConvert);
+			bundle.putString("SOLUTION", strSolution);
 			//set intent to gameover class
 			gameover.setClass(getBaseContext(), Gameover.class);
 			//add bundle to intent

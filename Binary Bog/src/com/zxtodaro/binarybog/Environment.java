@@ -2,9 +2,7 @@ package com.zxtodaro.binarybog;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
 
-import android.R.color;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,11 +11,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
-import android.graphics.Rect;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.TextView;
 
 
 /*DECLARE ALL VARIABLES & PROPERTIES*/

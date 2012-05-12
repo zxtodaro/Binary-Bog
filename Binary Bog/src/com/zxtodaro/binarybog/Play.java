@@ -307,7 +307,7 @@ import android.widget.Toast;
 						}
 						
 						if (mode == 0) {
-							if (listItem.isOne()) {
+							if (listItem.isOne() == 1) {
 								gameEnv.setGuess(gameEnv.getGuess() + "1");
 							}
 							else {
@@ -440,4 +440,5 @@ import android.widget.Toast;
 	public void setGameOver(boolean b) {
 		gameOver = b;
 	}
+	
 }

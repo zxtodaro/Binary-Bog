@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.view.SurfaceHolder;
@@ -37,6 +39,7 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 	//paint for HUD
 	private Paint text;
 	private Paint label;
+	private Paint value;
 	
 	//declare player
 	public Frog frog;
@@ -59,45 +62,17 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 	//String to hold guesses
 	private String guess;
 	
+	private AssetManager amFont;
+	
 	//create array to hold lilypads
 	public ArrayList<Lilypad> lilypads = new ArrayList<Lilypad>();
 	
 	//constructor
 	public Environment(Context context) {
 		super(context);
+		amFont = context.getAssets();
 		getHolder().addCallback(this);
 		thread = new EnvThread(this);
-	}
-	
-	/*THIS IS WHERE ALL DRAWING TO THE CANVAS TAKES PLACE*/
-	public void doDraw(Canvas c) {
-		
-		//draw river for background
-		c.drawBitmap(background, lBound, 0, null);
-		
-		//draw land rectangles
-		c.drawRect(0, 0, (getWidth() / 8 * 1), getHeight(), land);
-		c.drawRect((getWidth() / 8 * 7), 0, getWidth(), getHeight(), land);
-		
-		synchronized(lilypads) {
-			if (lilypads.size() > 0) {
-				for (Iterator<Lilypad> i = lilypads.iterator(); i.hasNext();) {
-					i.next().doDraw(c);
-				}
-			}
-		}
-
-			//draw HUD information
-			c.drawText("Convert: ", c.getWidth()/16 * 0, c.getHeight() / 15 * 1, label);
-			c.drawText(strConvert, c.getWidth()/16 * 1, c.getHeight() / 15 * 2, text);
-			c.drawText("Score: ", c.getWidth() / 8 * 7, c.getHeight() / 15 * 13, label);
-			c.drawText(String.valueOf(score), c.getWidth() / 8 * 7, c.getHeight() / 15 * 14, text);
-			c.drawText("Guess: ", c.getWidth() / 8 * 7, c.getHeight() / 15 * 1, label);
-			c.drawText(guess, c.getWidth() / 8 * 7, c.getHeight() / 15 * 2, text);
-			
-			//draw frog player
-			frog.doDraw(c);
-			
 	}
 	
 	/*THIS IS WHERE PLAY RECEIVES THE SURFACE FROM ENVIRONMENT AND THE ENVIRONMENT THREAD IS STARTED*/
@@ -119,6 +94,7 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 		//instantiate paint for HUD
 		text = new Paint();
 		label = new Paint();
+		value = new Paint();
 		
 		//set values for HUD text
 		text.setColor(Color.BLACK);
@@ -132,6 +108,17 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 		label.setStyle(Style.FILL);
 		label.setTextSize(36);
 		
+		//set values for lilypad value
+		//set custom font
+    	Typeface tfValue = Typeface.createFromAsset(amFont, "fonts/Forum-Regular.ttf"); 
+    	value.setTypeface(tfValue);
+    	
+		value.setColor(Color.BLACK);
+		value.setTextAlign(Align.CENTER);
+		value.setStyle(Style.FILL);
+		value.setFakeBoldText(true);
+		value.setTextSize(48);
+		
 		//instantiate frog for player token
 		frog = new Frog(getResources(), (int)(width / 2), (int)(height));
 		
@@ -143,6 +130,38 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 		}
 		Play.setSurface();
 		
+	}
+
+	/*THIS IS WHERE ALL DRAWING TO THE CANVAS TAKES PLACE*/
+	public void doDraw(Canvas c) {
+		
+		//draw river for background
+		c.drawBitmap(background, lBound, 0, null);
+		
+		//draw land rectangles
+		c.drawRect(0, 0, (getWidth() / 8 * 1), getHeight(), land);
+		c.drawRect((getWidth() / 8 * 7), 0, getWidth(), getHeight(), land);
+		
+		synchronized(lilypads) {
+			if (lilypads.size() > 0) {
+				for (Iterator<Lilypad> i = lilypads.iterator(); i.hasNext();) {
+					i.next().doDraw(c, value);
+					
+				}
+			}
+		}
+	
+			//draw HUD information
+			c.drawText("Convert: ", c.getWidth()/16 * 0, c.getHeight() / 15 * 1, label);
+			c.drawText(strConvert, c.getWidth()/16 * 1, c.getHeight() / 15 * 2, text);
+			c.drawText("Score: ", c.getWidth() / 8 * 7, c.getHeight() / 15 * 13, label);
+			c.drawText(String.valueOf(score), c.getWidth() / 8 * 7, c.getHeight() / 15 * 14, text);
+			c.drawText("Guess: ", c.getWidth() / 8 * 7, c.getHeight() / 15 * 1, label);
+			c.drawText(guess, c.getWidth() / 8 * 7, c.getHeight() / 15 * 2, text);
+			
+			//draw frog player
+			frog.doDraw(c);
+			
 	}
 
 	/*THIS IS WHERE ALL ANIMATION MUST TAKE PLACE*/

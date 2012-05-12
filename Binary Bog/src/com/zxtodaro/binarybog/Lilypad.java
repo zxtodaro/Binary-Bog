@@ -6,6 +6,8 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -17,8 +19,8 @@ public class Lilypad {
 	//bitmap for lilypad
 	private Bitmap bmp;
 	
-	//binary value (0, or 1)
-	private boolean valueB;
+	//boolean value of lilypad (0, or 1)
+	private int valueB;
 	
 	//octal value
 	private int valueO;
@@ -35,20 +37,18 @@ public class Lilypad {
 	//constructor
 	public Lilypad(Resources res, int mode) {
 		
+		if (mode == 0) {
+		//set valueO to negative so doDraw draws the correct label
+		valueO = -1;
 		//Randomly create one or zero
-		valueB = r.nextBoolean();
+		valueB = r.nextInt(2);
 		
 		//randomly choose bitmap
-		boolean bmpB = r.nextBoolean();
+		boolean bmpRandom = r.nextBoolean();
 		
-		//set octal value
-		valueO = r.nextInt(8);
-		
-		if (mode == 0) {
-		//instantiate and set bmp for lilypad
 		//set lilypad bitmap based on if random boolean is true (1) or false (0), set it to 3 or 4 if random boolean is false
-		if (valueB) {
-			if (bmpB) { 
+		if (valueB == 0) {
+			if (bmpRandom) { 
 			bmp = BitmapFactory.decodeResource(res, R.drawable.lilypad1);
 			}
 			else {
@@ -56,7 +56,7 @@ public class Lilypad {
 			}
 		}
 		else {
-			if (bmpB) {
+			if (bmpRandom) {
 			bmp = BitmapFactory.decodeResource(res, R.drawable.lilypad3);
 			}
 			else {
@@ -66,30 +66,28 @@ public class Lilypad {
 		}
 		
 		else if (mode == 1) {
-			//set lilypad bitmap based on octal value (valueO)
-			switch (valueO) {
-			case 0: bmp = BitmapFactory.decodeResource(res, R.drawable.lily0);
+			//set valueB to negative so doDraw draws the correct label
+			valueB = -1;
+			//randomly set octal value
+			valueO = r.nextInt(8);
+			//randomly set bitmap
+			int bmpRandom = r.nextInt(4);
+			
+			//set lilypad bitmap based on random value
+			switch (bmpRandom) {
+			case 0: bmp = BitmapFactory.decodeResource(res, R.drawable.lilypad1);
 			break;
-			case 1: bmp = BitmapFactory.decodeResource(res, R.drawable.lily1);
+			case 1: bmp = BitmapFactory.decodeResource(res, R.drawable.lilypad2);
 			break;
-			case 2: bmp = BitmapFactory.decodeResource(res, R.drawable.lily2);
+			case 2: bmp = BitmapFactory.decodeResource(res, R.drawable.lilypad3);
 			break;
-			case 3: bmp = BitmapFactory.decodeResource(res, R.drawable.lily3);
-			break;
-			case 4: bmp = BitmapFactory.decodeResource(res, R.drawable.lily4);
-			break;
-			case 5: bmp = BitmapFactory.decodeResource(res, R.drawable.lily5);
-			break;
-			case 6: bmp = BitmapFactory.decodeResource(res, R.drawable.lily6);
-			break;
-			case 7: bmp = BitmapFactory.decodeResource(res, R.drawable.lily7);
-			break;
+			case 3: bmp = BitmapFactory.decodeResource(res, R.drawable.lilypad4);
 				}
 		}
 
 		
 		//set travel lane
-		laneX = r.nextInt(8);
+		laneX = r.nextInt(9);
 		
 		switch (laneX) {
 		case 0:
@@ -137,8 +135,16 @@ public class Lilypad {
         return false;
     }
     
-    public void doDraw(Canvas c) {
+    public void doDraw(Canvas c, Paint label) {
     	c.drawBitmap(bmp, X, Y, null);
+
+    	
+    	if (valueO < 0) {
+    	   	c.drawText(String.valueOf(valueB), X + (bmp.getWidth() / 2), Y + (bmp.getHeight() / 2), label);
+    	}
+    	else {
+    		c.drawText(String.valueOf(valueO), X + (bmp.getWidth() / 2), Y + (bmp.getHeight() / 2), label);
+    	}
     }
 	
 	//get x position
@@ -163,12 +169,12 @@ public class Lilypad {
 		this.speedY = s;
 	}
 	
-	//check if lilypad is 1(true) or 0(false)
-	public boolean isOne() {
+	//check if lilypad is 1 or 0
+	public int isOne() {
 		return valueB;
 	}
-	//set lilypad to 1(true) or 0(false)
-	public void setOne(boolean one) {
+	//set lilypad to 1 or 0
+	public void setOne(int one) {
 		this.valueB = one;
 	}
 	//check octal value of lilypad

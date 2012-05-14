@@ -97,7 +97,7 @@ import android.widget.Toast;
 			music.seekTo(0);
 			music.start();
 			
-			//check if play was called on by activity
+			//check which activity play called on play
 			if (getIntent().toString().endsWith(".Play (has extras) }")) {
 				Bundle bundle = getIntent().getExtras();
 				mode = bundle.getInt("MODE");

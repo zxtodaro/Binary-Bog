@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -62,15 +63,12 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 	//String to hold guesses
 	private String guess;
 	
-	private AssetManager amFont;
-	
 	//create array to hold lilypads
 	public ArrayList<Lilypad> lilypads = new ArrayList<Lilypad>();
 	
 	//constructor
 	public Environment(Context context) {
 		super(context);
-		amFont = context.getAssets();
 		getHolder().addCallback(this);
 		thread = new EnvThread(this);
 	}
@@ -110,7 +108,7 @@ public class Environment extends SurfaceView implements SurfaceHolder.Callback {
 		
 		//set values for lilypad value
 		//set custom font
-    	Typeface tfValue = Typeface.createFromAsset(amFont, "fonts/Forum-Regular.ttf"); 
+    	Typeface tfValue = Typeface.createFromAsset(getResources().getAssets(), "fonts/Forum-Regular.ttf"); 
     	value.setTypeface(tfValue);
     	
 		value.setColor(Color.BLACK);

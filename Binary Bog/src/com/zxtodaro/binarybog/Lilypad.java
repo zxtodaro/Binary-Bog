@@ -46,8 +46,8 @@ public class Lilypad {
 		//randomly choose bitmap
 		boolean bmpRandom = r.nextBoolean();
 		
-		//set lilypad bitmap based on if random boolean is true (1) or false (0), set it to 3 or 4 if random boolean is false
-		if (valueB == 0) {
+		//set lilypad bitmap based on if random number(valueB) is 0 or 1, set it to 3 or 4 if random boolean is false
+		if (valueB == 1) {
 			if (bmpRandom) { 
 			bmp = BitmapFactory.decodeResource(res, R.drawable.lilypad1);
 			}

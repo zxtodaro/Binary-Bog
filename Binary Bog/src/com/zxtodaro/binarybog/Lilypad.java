@@ -4,11 +4,16 @@ import java.util.Random;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.RotateDrawable;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 public class Lilypad {
@@ -34,8 +39,30 @@ public class Lilypad {
 	//starting X value
 	private int laneX;
 	
+	//set whether the lilypad has been hopped on (used) or not
+	private boolean used;
+	
+	//check if the lilypad is being leaptFrom
+	private boolean leaptFrom;
+	
+	//opacity
+	private int alpha;
+	
+	//paint for fade out
+	private Paint fadeOut;
+	
 	//constructor
 	public Lilypad(Resources res, int mode) {
+		
+		//set used to false
+		used = false;
+		//set leaptFrom to false
+		leaptFrom = false;
+		//set opacity to 100%
+		alpha = 255;
+		//set alpha level of paint
+		fadeOut = new Paint();
+		fadeOut.setAlpha(alpha);
 		
 		if (mode == 0) {
 		//set valueO to negative so doDraw draws the correct label
@@ -125,9 +152,20 @@ public class Lilypad {
 	
 	public void animation(long runTime) {
 		Y += speedY * (runTime * 5f);
+		
+		//fade lilypad if marked as leaptFrom
+		if ((alpha > 0) && (isLeaptFrom())) {
+			alpha -= 5;
+			Log.i("Alpha", String.valueOf(alpha));
+		 setAlpha(alpha);
+		 }
 	}
 	
-    public boolean outOfBounds() {
+    private void setAlpha(int alpha) {
+		fadeOut.setAlpha(alpha);
+	}
+
+	public boolean outOfBounds() {
         if (Y - bmp.getHeight() >= Environment.height) {
             return true;
         }
@@ -136,7 +174,7 @@ public class Lilypad {
     }
     
     public void doDraw(Canvas c, Paint label) {
-    	c.drawBitmap(bmp, X, Y, null);
+    	c.drawBitmap(bmp, X, Y, fadeOut);
 
     	
     	if (valueO < 0) {
@@ -196,5 +234,21 @@ public class Lilypad {
 	//get image height
 	public int getHeight() {
 		return bmp.getHeight();
+	}
+
+	public boolean isUsed() {
+		return used;
+	}
+
+	public void setUsed(boolean used) {
+		this.used = used;
+	}
+	
+	public boolean isLeaptFrom() {
+		return leaptFrom;
+	}
+	
+	public void setLeaptFrom (boolean leaptFrom) {
+		this.leaptFrom = leaptFrom;
 	}
 }

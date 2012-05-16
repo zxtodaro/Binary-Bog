@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -268,7 +269,7 @@ import android.widget.Toast;
 						bundle.putInt("LEVEL", gameEnv.getLevel());
 						bundle.putInt("MODE", mode);
 						bundle.putString("CONVERT", strConvert);
-						bundle.putString("CONVERTED", strSolution);
+						bundle.putString("SOLUTION", strSolution);
 						//set intent to gameover class
 						gameover.setClass(getBaseContext(), Gameover.class);
 						//add bundle to intent
@@ -294,12 +295,20 @@ import android.widget.Toast;
 		if (v.getId() == gameEnv.getId()) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
 				for (Iterator<Lilypad> i = gameEnv.lilypads.iterator(); i.hasNext();) {
-					Lilypad listItem = i.next();
-					//create bounding box for each lilypad on screen and see if the user touched a lilypad
-					Rect hop = new Rect(listItem.getX(), listItem.getY(), listItem.getX()+listItem.getWidth(), listItem.getY()+listItem.getHeight());
-					if (hop.contains((int)(event.getX()), (int)(event.getY()))) {
-						gameEnv.frog.setX(listItem.getX());
-						gameEnv.frog.setY(listItem.getY());
+					Lilypad lilypad = i.next();
+					//create bounding box for each lilypad on screen
+					Rect hop = new Rect(lilypad.getX(), lilypad.getY(), lilypad.getX()+lilypad.getWidth(), lilypad.getY()+lilypad.getHeight());
+					
+					//see which lilypad you are on and set it as leaptFrom(triggers fading animation)
+					if (hop.contains((int)gameEnv.frog.getX() + gameEnv.frog.getWidth() / 2, (int)gameEnv.frog.getY() + gameEnv.frog.getHeight() / 2)) {
+						lilypad.setLeaptFrom(true);
+						Log.i("I am"," leaptFrom");
+					}
+					//see if the user pressed within one of the bounding boxes and move the frog to that lilypad
+					if (hop.contains((int)(event.getX()), (int)(event.getY())) && !lilypad.isUsed()) {
+						gameEnv.frog.setX(lilypad.getX());
+						gameEnv.frog.setY(lilypad.getY());
+						lilypad.setUsed(true);
 						
 						//if player hops and has not hopped before, change hopped to true
 						if (!gameEnv.frog.isHopped()) {
@@ -307,7 +316,7 @@ import android.widget.Toast;
 						}
 						
 						if (mode == 0) {
-							if (listItem.isOne() == 1) {
+							if (lilypad.isOne() == 1) {
 								gameEnv.setGuess(gameEnv.getGuess() + "1");
 							}
 							else {
@@ -315,7 +324,7 @@ import android.widget.Toast;
 							}
 						}
 						else if (mode == 1) {
-							switch (listItem.getValueO()) {
+							switch (lilypad.getValueO()) {
 							case 0: gameEnv.setGuess(gameEnv.getGuess() + "0");
 							break;
 							case 1: gameEnv.setGuess(gameEnv.getGuess() + "1");
@@ -336,6 +345,12 @@ import android.widget.Toast;
 						}
 
 						checkWin();
+					}
+					
+					else if (hop.contains(((int)event.getX()), (int)event.getY()) && (lilypad.isUsed())) {
+						Toast used = Toast.makeText(getApplicationContext(), "You already hopped on that lilypad", 2);
+						used.setGravity(Gravity.CENTER, 0, 400);
+						used.show();
 					}
 				}
 
